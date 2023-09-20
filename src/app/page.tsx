@@ -3,7 +3,7 @@ import React from 'react';
 export default function page() {
     return (
         <div className="ml-4 flex h-24 border-2  border-gray-300 p-3 px-5 text-gray-700 shadow-md">
-            page
+            page testing
         </div>
     );
 }
