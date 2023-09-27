@@ -9,14 +9,6 @@ export default function LanguageButton() {
             id: 'en',
             title: '🇺🇸 English [EN]',
         },
-        {
-            id: 'ge',
-            title: '🇩🇪 Germany [GE]',
-        },
-        {
-            id: 'es',
-            title: '🇪🇸 Spanish [ES]',
-        },
     ];
     return (
         <Dropdown

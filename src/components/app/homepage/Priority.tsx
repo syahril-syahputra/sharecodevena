@@ -9,34 +9,40 @@ function Priority() {
     return (
         <div className="container  space-y-8 py-16">
             <div className="mx-auto max-w-4xl space-y-4 text-center font-bold">
-                <h1 className="text-xxl ">Your Needs, Our Priority.</h1>
+                <h1 className="text-xxl ">
+                    We Provide Only Authenticated Parts
+                </h1>
                 <div>
-                    Occaecat dolor minim dolor consequat. Commodo occaecat
-                    mollit excepteur ullamco magna reprehenderit labore in nulla
-                    non cillum ad.
+                    Exepart Electronics Inc. excels in offering genuine
+                    electronic components directly from manufacturers, as well
+                    as through our extensive network of franchised distributors
+                    and qualified OEM vendors.
                 </div>
             </div>
             <Image
-                src="/images/sample.jpg"
+                src="/images/sample.webp"
                 width={0}
                 height={0}
                 sizes="100vw"
                 alt="asd"
-                className="mx-auto w-full max-w-4xl rounded-md"
+                className="mx-auto w-full max-w-4xl rounded-[20%] shadow-2xl"
             />
             <div className="mx-auto max-w-4xl space-y-4 text-center font-bold">
-                <h1 className="text-lg ">
+                {/* <h1 className="text-lg ">
                     In Lorem sit consectetur enim ipsum magna voluptate magna
                     exercitation.
-                </h1>
+                </h1> */}
                 <div>
-                    Consequat qui non aliqua nisi excepteur velit mollit.
-                    Consequat eiusmod ullamco dolor minim exercitation sit
-                    consectetur consequat in do officia non. Qui duis aliquip
-                    voluptate aliquip irure quis minim. Deserunt ut ad id aliqua
-                    reprehenderit nostrud ad. Adipisicing officia cillum nostrud
-                    duis exercitation veniam anim aute laboris consequat
-                    consequat.
+                    We provide a distinctive solution to tier-1, tier-2, and
+                    tier-3 OEMs and CMs who are in need of reliable and
+                    authenticated obsolete electronic components. As part of our
+                    service, every purchase order from Exepart Electronics Inc.
+                    undergoes a thorough Quality Inspection. We are dedicated to
+                    combating counterfeit products and offer authentication and
+                    testing services for electronic components, along with
+                    value-added services. All orders placed with Exepart
+                    Electronics Inc. are mandatory tested and authenticated by
+                    White Horse Laboratories.
                 </div>
             </div>
             <div className="mx-auto flex flex-col rounded-lg  bg-slate-300 bg-opacity-40 p-8 font-bold dark:bg-slate-700 md:flex-row">
