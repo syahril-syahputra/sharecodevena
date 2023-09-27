@@ -1,6 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-white text-gray-500 dark:bg-gray-800 dark:text-white;
+    }
+}
+@layer utilities {
+    .filter-dark-mode {
+        mix-blend-mode: screen;
+        filter: invert(100%) hue-rotate(180deg);
+    }
+}
+.rainbow-light {
+    background-image: linear-gradient(
+        135deg,
+        hsl(198deg 85% 72%) 0%,
+        hsl(193deg 77% 69%) 10%,
+        hsl(188deg 71% 65%) 20%,
+        hsl(184deg 66% 61%) 30%,
+        hsl(179deg 64% 57%) 40%,
+        hsl(175deg 69% 54%) 50%,
+        hsl(182deg 65% 51%) 60%,
+        hsl(188deg 70% 51%) 70%,
+        hsl(194deg 76% 51%) 80%,
+        hsl(198deg 81% 50%) 90%,
+        hsl(202deg 95% 48%) 100%
+    );
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-size: 24px; /* Sesuaikan ukuran teks sesuai kebutuhan */
+    font-weight: bold; /* Sesuaikan gaya teks sesuai kebutuhan */
+}
+
+.rainbow-dark {
+    background-image: linear-gradient(
+        135deg,
+        hsl(194deg 100% 34%) 0%,
+        hsl(191deg 100% 33%) 10%,
+        hsl(188deg 100% 32%) 20%,
+        hsl(184deg 100% 31%) 30%,
+        hsl(180deg 100% 29%) 40%,
+        hsl(175deg 95% 30%) 50%,
+        hsl(178deg 100% 28%) 60%,
+        hsl(182deg 100% 27%) 70%,
+        hsl(184deg 100% 27%) 80%,
+        hsl(187deg 99% 27%) 90%,
+        hsl(190deg 74% 30%) 100%
+    );
+
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-size: 24px; /* Sesuaikan ukuran teks sesuai kebutuhan */
+    font-weight: bold; /* Sesuaikan gaya teks sesuai kebutuhan */
+}
+.gradient-icon {
+    background: linear-gradient(90deg, #00ff00, #ff0000);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 /*
 :root {
   --foreground-rgb: 0, 0, 0;

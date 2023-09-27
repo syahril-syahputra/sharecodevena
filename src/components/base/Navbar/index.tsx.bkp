@@ -1,0 +1,40 @@
+'use client';
+import React, { useEffect, useState } from 'react';
+import TopNavbar from './TopNavbar';
+import BottomNavbar from './BottomNavbar';
+
+export default function NavbarComponent() {
+    const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            const topNavbarHeight = 42;
+
+            if (scrollPosition > topNavbarHeight) {
+                setIsNavbarFixed(true);
+            } else {
+                setIsNavbarFixed(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+    return (
+        <div className="w-full overflow-auto ">
+            <TopNavbar />
+            <div
+                className={`w-full   dark:bg-slate-900 ${
+                    isNavbarFixed
+                        ? 'fixed top-0 bg-opacity-5'
+                        : 'bg-slate-200 bg-opacity-100'
+                }`}
+            >
+                <BottomNavbar />
+            </div>
+        </div>
+    );
+}
