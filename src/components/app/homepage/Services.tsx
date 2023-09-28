@@ -37,9 +37,9 @@ export default function Services() {
         <div className="relative overflow-hidden bg-slate-300 py-8 dark:bg-slate-700">
             <div className="container items-center space-y-4 md:flex md:space-x-28 md:space-y-0">
                 <div className="flex-1">
-                    <h1 className="text-xxl font-bold text-gray-700 dark:text-white">
+                    <div className="text-xxl font-bold text-gray-700 dark:text-white">
                         Our services
-                    </h1>
+                    </div>
                     <span className="text-lg text-gray-700 dark:text-white">
                         We are here to understand your needs and provide
                         customised solutions for effective, on-time procurement.

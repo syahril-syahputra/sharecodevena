@@ -9,9 +9,9 @@ function Priority() {
     return (
         <div className="container  space-y-8 py-16">
             <div className="mx-auto max-w-4xl space-y-4 text-center font-bold">
-                <h1 className="text-xxl ">
+                <div className="text-xxl ">
                     We Provide Only Authenticated Parts
-                </h1>
+                </div>
                 <div>
                     Exepart Electronics Inc. excels in offering genuine
                     electronic components directly from manufacturers, as well

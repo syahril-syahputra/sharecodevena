@@ -48,9 +48,9 @@ function HomePageBanner() {
     return (
         <div className="relative flex h-auto w-full items-center ">
             <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  text-center text-white">
-                <h1 className="mb-8 flex-wrap font-bold md:text-[40px]">
+                <span className="mb-8 flex-wrap font-bold md:text-[40px]">
                     Your preferred supplier for global sourcing
-                </h1>
+                </span>
                 <div className="mx-auto max-w-3xl bg-slate-600 bg-opacity-25 p-4">
                     <SearchProduct />
                     <Hot />

@@ -16,7 +16,7 @@ const ItemComponent = (props: {
         <div className="flex flex-1 cursor-pointer items-center space-x-4 px-4 py-8 font-bold text-teal-500 hover:bg-slate-200 dark:text-teal-400 dark:hover:bg-slate-600">
             {props.icon}
             <div>
-                <h1 className="text-xl ">{props.title}</h1>
+                <div className="text-xl ">{props.title}</div>
                 <label className="text-sm text-slate-700 dark:text-white">
                     {props.desc}
                 </label>

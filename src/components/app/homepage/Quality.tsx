@@ -29,7 +29,7 @@ export default function Quality() {
                         alt="asd"
                         className="dark:filter-dark-mode mx-auto w-full flex-1 rounded-md"
                     />
-                    <h1 className="text-xxl font-bold">Quality Assurance</h1>
+                    <div className="text-xxl font-bold">Quality Assurance</div>
                     <div className="line-clamp-6">
                         Venatronics enforces a mandatory quality control regimen
                         rooted in the AS9120:2016 and AS6081 standards, ensuring

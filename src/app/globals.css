@@ -13,6 +13,12 @@
         filter: invert(100%) hue-rotate(180deg);
     }
 }
+h1 {
+    @apply mb-4 text-xl font-bold;
+}
+h2 {
+    @apply mb-2 text-lg font-bold;
+}
 .rainbow-light {
     background-image: linear-gradient(
         135deg,

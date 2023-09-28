@@ -33,14 +33,19 @@ export default function BottomNavbar() {
                         >
                             About Us
                         </Navbar.Link>
-                        <Navbar.Link href="/navbars">Products</Navbar.Link>
-                        <Navbar.Link href="/navbars">RFQ</Navbar.Link>
-                        <Navbar.Link href="/navbars">
+                        <Navbar.Link
+                            href="/products"
+                            active={pathname === '/products'}
+                        >
+                            Products
+                        </Navbar.Link>
+                        <Navbar.Link href="/rfq">RFQ</Navbar.Link>
+                        <Navbar.Link href="/distributorships">
                             Distributorships
                         </Navbar.Link>
-                        <Navbar.Link href="/navbars">Services</Navbar.Link>
-                        <Navbar.Link href="/navbars">Quality</Navbar.Link>
-                        <Navbar.Link href="/navbars">Contact</Navbar.Link>
+                        <Navbar.Link href="/services">Services</Navbar.Link>
+                        <Navbar.Link href="/quality">Quality</Navbar.Link>
+                        <Navbar.Link href="/contact">Contact</Navbar.Link>
                     </Navbar.Collapse>
                 </Navbar>
             </div>
