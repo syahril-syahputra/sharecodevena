@@ -46,7 +46,7 @@ const Hot = () => {
 
 function HomePageBanner() {
     return (
-        <div className="relative flex h-auto w-full items-center ">
+        <div className="relative flex h-auto min-h-full w-full items-center ">
             <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  text-center text-white">
                 <span className="mb-8 flex-wrap font-bold md:text-[40px]">
                     Your preferred supplier for global sourcing
@@ -56,7 +56,13 @@ function HomePageBanner() {
                     <Hot />
                 </div>
             </div>
-            <video loop src="/videos/banner.mp4" autoPlay muted></video>
+            <video
+                loop
+                src="/videos/banner.mp4"
+                className="w-full"
+                autoPlay
+                muted
+            ></video>
         </div>
     );
 }
