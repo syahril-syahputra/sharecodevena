@@ -47,7 +47,7 @@ export default function page() {
                     </div>
                     <TextInput id="password1" required type="password" />
                 </div>
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Submit t</Button>
             </form>
         </div>
     );
