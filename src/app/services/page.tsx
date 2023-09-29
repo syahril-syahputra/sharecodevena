@@ -19,6 +19,7 @@ export default function page() {
 
             <div className="container space-y-8 py-8">
                 <div className="">
+                    <h2>Obsolete Component Management</h2>
                     <div className="relative float-left mb-8 mr-4  w-1/2 overflow-visible px-3 pt-4">
                         <Image
                             src="/images/obsolete-management.jpg"
@@ -32,7 +33,6 @@ export default function page() {
                     </div>
 
                     <div className="flex-1">
-                        <h2>Obsolete Component Management</h2>
                         Obsolete Component Management Explore the world of
                         electronic components where obsolescence isn{`'`}t an
                         obstacle; it{`'`}s an opportunity. When an electronic

@@ -32,7 +32,7 @@ export default function RootLayout({
                         <div className="relative overflow-auto">
                             <NavbarComponent />
                         </div>
-                        <main className="mt-[128px] flex-1 py-4">
+                        <main className="relative mt-[128px] flex-1 py-4">
                             {children}
                         </main>
                         <Footer />
