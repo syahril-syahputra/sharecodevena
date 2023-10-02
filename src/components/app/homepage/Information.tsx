@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
 const ItemComponent = (props: {
     title: string;
@@ -13,7 +14,12 @@ const ItemComponent = (props: {
     icon: ReactNode;
 }) => {
     return (
-        <div className="flex flex-1 cursor-pointer items-center space-x-4 px-4 py-8 font-bold text-teal-500 hover:bg-slate-200 dark:text-teal-400 dark:hover:bg-slate-600">
+        <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-1 cursor-pointer items-center space-x-4 px-4 py-8 font-bold text-teal-500 hover:bg-slate-200 dark:text-teal-400 dark:hover:bg-slate-600"
+        >
             {props.icon}
             <div>
                 <div className="text-xl ">{props.title}</div>
@@ -21,7 +27,7 @@ const ItemComponent = (props: {
                     {props.desc}
                 </label>
             </div>
-        </div>
+        </motion.div>
     );
 };
 export default function Information() {
