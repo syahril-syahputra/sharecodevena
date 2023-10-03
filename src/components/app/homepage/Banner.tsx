@@ -2,6 +2,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'flowbite-react';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const SearchProduct = () => {
     return (
@@ -48,13 +49,23 @@ function HomePageBanner() {
     return (
         <div className="relative flex h-auto min-h-full w-full items-center ">
             <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  space-y-10 text-center text-white">
-                <span className="mb-8 flex-wrap text-[25px] font-bold md:text-[40px]">
+                <motion.span
+                    initial={{ opacity: 0, marginBottom: '300px' }}
+                    whileInView={{ opacity: 1, marginBottom: '40px' }}
+                    transition={{ duration: 1 }}
+                    className=" block flex-wrap text-[25px] font-bold md:text-[40px]"
+                >
                     Your preferred supplier for global sourcing
-                </span>
-                <div className="mx-auto max-w-3xl bg-slate-600 bg-opacity-25 p-2 ">
+                </motion.span>
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 1 }}
+                    className="mx-auto max-w-3xl bg-slate-600 bg-opacity-25 p-2 "
+                >
                     <SearchProduct />
                     <Hot />
-                </div>
+                </motion.div>
             </div>
             <div className="h-[500px] w-full overflow-scroll md:h-full">
                 <video
