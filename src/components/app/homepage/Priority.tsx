@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'flowbite-react';
 import Image from 'next/image';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 function Priority() {
     return (
-        <div className="container  space-y-8 py-16">
+        <section className="container  space-y-8 py-16">
             <div className="mx-auto max-w-4xl space-y-4 text-center font-bold">
                 <div className="text-xxl ">
                     We Provide Only Authenticated Parts
@@ -45,7 +46,12 @@ function Priority() {
                     White Horse Laboratories.
                 </div>
             </div>
-            <div className="mx-auto flex flex-col rounded-lg  bg-slate-300 bg-opacity-40 p-8 font-bold dark:bg-slate-700 md:flex-row">
+            <motion.div
+                // initial={{ opacity: 0, marginLeft: '100vw' }}
+                // whileInView={{ opacity: 1, marginLeft: 0 }}
+                // transition={{ duration: 1 }}
+                className="mx-auto flex flex-col rounded-lg  bg-slate-300 bg-opacity-40 p-8 font-bold dark:bg-slate-700 md:flex-row"
+            >
                 <div className="flex-1">
                     <span className="flex items-center space-x-4 text-lg text-teal-500  dark:text-teal-400">
                         <FontAwesomeIcon icon={faThumbsUp} fontSize={40} />
@@ -125,9 +131,9 @@ function Priority() {
                         </li>
                     </ul>
                 </div>
-            </div>
+            </motion.div>
             <Button className="mx-auto px-20">About Us</Button>
-        </div>
+        </section>
     );
 }
 

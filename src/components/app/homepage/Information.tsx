@@ -14,20 +14,22 @@ const ItemComponent = (props: {
     icon: ReactNode;
 }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex flex-1 cursor-pointer items-center space-x-4 px-4 py-8 font-bold text-teal-500 hover:bg-slate-200 dark:text-teal-400 dark:hover:bg-slate-600"
-        >
-            {props.icon}
-            <div>
-                <div className="text-xl ">{props.title}</div>
-                <label className="text-sm text-slate-700 dark:text-white">
-                    {props.desc}
-                </label>
-            </div>
-        </motion.div>
+        <div className="w-full border-b-2 border-gray-400 last:border-b-0 last:border-r-0 md:border-b-0 md:border-r-2">
+            <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 1 }}
+                className="flex flex-1 cursor-pointer items-center space-x-4  px-4 py-8 font-bold text-teal-500  dark:text-teal-400 dark:hover:bg-slate-600  "
+            >
+                {props.icon}
+                <div>
+                    <div className="text-xl ">{props.title}</div>
+                    <label className="text-sm text-slate-700 dark:text-white">
+                        {props.desc}
+                    </label>
+                </div>
+            </motion.div>
+        </div>
     );
 };
 export default function Information() {
