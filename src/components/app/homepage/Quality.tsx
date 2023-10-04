@@ -10,9 +10,9 @@ export default function Quality() {
                     <div className="relative overflow-visible  px-4 pt-4">
                         <Image
                             src="/images/quality.jpg"
-                            width={0}
-                            height={0}
-                            sizes="90vw"
+                            width={100}
+                            height={100}
+                            sizes="responsive"
                             alt="asd"
                             className="z-10  mx-auto w-full flex-1 rounded-lg"
                         />

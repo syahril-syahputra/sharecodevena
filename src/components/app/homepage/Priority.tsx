@@ -5,6 +5,7 @@ import { Button } from 'flowbite-react';
 import Image from 'next/image';
 import React from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 function Priority() {
     return (
@@ -64,10 +65,11 @@ function Priority() {
                                 fontSize={30}
                             />
                             <span>
-                                Respond to enquiries within{' '}
+                                Response to inquiries within{' '}
                                 <label className="text-lg font-bold text-teal-500  dark:text-teal-400">
-                                    1 hour
-                                </label>
+                                    24 hours
+                                </label>{' '}
+                                maximum
                             </span>
                         </li>
                         <li className="flex items-center space-x-2">
@@ -76,9 +78,9 @@ function Priority() {
                                 fontSize={30}
                             />
                             <span>
-                                Receive quotation within{' '}
+                                Offers alternatives within same day{' '}
                                 <label className="text-lg font-bold text-teal-500  dark:text-teal-400">
-                                    8 hours
+                                    same day
                                 </label>
                             </span>
                         </li>
@@ -90,7 +92,7 @@ function Priority() {
                             <span>
                                 Order shipment within{' '}
                                 <label className="text-lg font-bold text-teal-500  dark:text-teal-400">
-                                    24 hours
+                                    2-3 days
                                 </label>
                             </span>
                         </li>
@@ -132,7 +134,9 @@ function Priority() {
                     </ul>
                 </div>
             </motion.div>
-            <Button className="mx-auto px-20">About Us</Button>
+            <Link href={'/about-us'} className="mt-4 block">
+                <Button className="mx-auto px-20">About Us</Button>
+            </Link>
         </section>
     );
 }

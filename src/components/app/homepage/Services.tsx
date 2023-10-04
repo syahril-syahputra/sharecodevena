@@ -5,6 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'flowbite-react';
+import Link from 'next/link';
 import React from 'react';
 
 const ServiceBox = (props: {
@@ -44,7 +45,9 @@ export default function Services() {
                         We are here to understand your needs and provide
                         customised solutions for effective, on-time procurement.
                     </span>
-                    <Button className="mt-8 font-bold">Read more</Button>
+                    <Link href={'/services'}>
+                        <Button className="mt-8 font-bold">Read more</Button>
+                    </Link>
                 </div>
                 <div className="flex-1 space-y-4">
                     <ServiceBox

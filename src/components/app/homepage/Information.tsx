@@ -1,7 +1,7 @@
 import {
     faBook,
     faBuilding,
-    faMedal,
+    faClockFour,
     faPersonCircleCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,11 +37,11 @@ export default function Information() {
         <section className="bg-slate-300 dark:bg-slate-700">
             <div className="container flex flex-col justify-between md:flex-row">
                 <ItemComponent
-                    title="15+"
-                    desc="Year Experiences"
+                    title="50+"
+                    desc="International Customers"
                     icon={
                         <FontAwesomeIcon
-                            icon={faMedal}
+                            icon={faPersonCircleCheck}
                             className="aspect-square text-[42px]"
                         />
                     }
@@ -57,21 +57,21 @@ export default function Information() {
                     }
                 />
                 <ItemComponent
-                    title="150+"
-                    desc="Procurement Specialists"
+                    title="1.256.875"
+                    desc="Parts in Stock"
                     icon={
                         <FontAwesomeIcon
-                            icon={faPersonCircleCheck}
+                            icon={faBook}
                             className="aspect-square text-[48px]"
                         />
                     }
                 />
                 <ItemComponent
-                    title="100%"
-                    desc="Other Fulfillment"
+                    title="24 Hours"
+                    desc="Quotation within 24 Hours"
                     icon={
                         <FontAwesomeIcon
-                            icon={faBook}
+                            icon={faClockFour}
                             className="aspect-square text-[42px]"
                         />
                     }

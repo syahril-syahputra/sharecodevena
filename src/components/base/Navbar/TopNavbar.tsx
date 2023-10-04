@@ -1,36 +1,42 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faFacebook,
+    // faFacebook,
     faLinkedin,
-    faTwitter,
-    faYoutube,
+    // faTwitter,
+    // faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faPhoneFlip } from '@fortawesome/free-solid-svg-icons';
 import { ButtonTheme } from './ButtonTheme';
 import LanguageButton from './LanguageButton';
+import Link from 'next/link';
 
 export default function TopNavbar() {
     return (
         <div className=" bg-slate-700 py-2 text-white">
             <div className="container flex items-center justify-between">
                 <div className="space-x-4">
-                    <FontAwesomeIcon
+                    {/* <FontAwesomeIcon
                         icon={faFacebook}
                         className="h-[20px] text-[20px] text-white"
-                    />
-                    <FontAwesomeIcon
-                        icon={faLinkedin}
-                        className="h-[20px] text-[20px] text-white"
-                    />
-                    <FontAwesomeIcon
+                    /> */}
+                    <Link
+                        href="https://www.linkedin.com/company/venatronics-llc/"
+                        target="_blank"
+                    >
+                        <FontAwesomeIcon
+                            icon={faLinkedin}
+                            className="h-[20px] text-[20px] text-white"
+                        />
+                    </Link>
+                    {/* <FontAwesomeIcon
                         icon={faTwitter}
                         className="h-[20px] text-[20px] text-white"
                     />
                     <FontAwesomeIcon
                         icon={faYoutube}
                         className="h-[20px] text-[20px] text-white"
-                    />
+                    /> */}
                 </div>
                 <div className="flex space-x-4">
                     <ul className="hidden items-center space-x-8 text-sm md:flex">

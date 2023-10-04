@@ -27,7 +27,7 @@ export default function RootLayout({
                 <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
-                    enableSystem
+                    // enableSystem
                 >
                     <div className="flex min-h-screen flex-col ">
                         <div className="relative overflow-auto">

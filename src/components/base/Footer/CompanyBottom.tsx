@@ -2,11 +2,12 @@ import React from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faFacebook,
     faLinkedin,
-    faTwitter,
-    faYoutube,
+    // faFacebook,
+    // faTwitter,
+    // faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
+import Link from 'next/link';
 export default function CompanyBottom() {
     return (
         <div className="mb-6 flex-1 items-center space-y-4 md:mb-0">
@@ -26,22 +27,27 @@ export default function CompanyBottom() {
             </div>
             <div className="mt-20">Follow us</div>
             <div className="space-x-6">
-                <FontAwesomeIcon
+                {/* <FontAwesomeIcon
                     icon={faFacebook}
                     className="h-[30px] text-[30px] text-gray-600 dark:text-white"
-                />
-                <FontAwesomeIcon
-                    icon={faLinkedin}
-                    className="h-[30px] text-[30px] text-gray-600 dark:text-white"
-                />
-                <FontAwesomeIcon
+                /> */}
+                <Link
+                    href="https://www.linkedin.com/company/venatronics-llc/"
+                    target="_blank"
+                >
+                    <FontAwesomeIcon
+                        icon={faLinkedin}
+                        className="h-[30px] text-[30px] text-gray-600 dark:text-white"
+                    />
+                </Link>
+                {/* <FontAwesomeIcon
                     icon={faTwitter}
                     className="h-[30px] text-[30px] text-gray-600 dark:text-white"
                 />
                 <FontAwesomeIcon
                     icon={faYoutube}
                     className="h-[30px] text-[30px] text-gray-600 dark:text-white"
-                />
+                /> */}
             </div>
         </div>
     );
