@@ -19,7 +19,7 @@ export const ButtonTheme = () => {
     return (
         <span
             className="cursor-pointer rounded-md px-2 py-0 hover:bg-slate-400 active:bg-slate-600"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
         >
             {theme === 'light' ? (
                 <FontAwesomeIcon

@@ -1,12 +1,18 @@
 import { Button } from 'flowbite-react';
 import Image from 'next/image';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function Quality() {
     return (
         <div className="  container py-8">
             <div className="items-center md:flex">
-                <div className="flex-1 space-y-8 py-8 pr-4 text-gray-700 dark:text-white">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    className="flex-1 space-y-8 py-8 pr-4 text-gray-700 dark:text-white"
+                >
                     <div className="relative overflow-visible  px-4 pt-4">
                         <Image
                             src="/images/quality.jpg"
@@ -18,9 +24,14 @@ export default function Quality() {
                         />
                         <div className="absolute -bottom-5 -left-0 right-10 top-10 -z-10 rounded-lg bg-cyan-600"></div>
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="flex-1 space-y-8 py-8 pr-4 text-gray-700 dark:text-white">
+                <motion.div
+                    initial={{ opacity: 0, x: '100%' }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1 }}
+                    className="flex-1 space-y-8 py-8 pr-4 text-gray-700 dark:text-white"
+                >
                     <Image
                         src="/images/quality2.png"
                         width={0}
@@ -37,7 +48,7 @@ export default function Quality() {
                         our esteemed clientele.
                     </div>
                     <Button className="px-20">Learn more</Button>
-                </div>
+                </motion.div>
             </div>
         </div>
     );

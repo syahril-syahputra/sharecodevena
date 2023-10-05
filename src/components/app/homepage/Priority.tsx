@@ -10,7 +10,12 @@ import Link from 'next/link';
 function Priority() {
     return (
         <section className="container  space-y-8 py-16">
-            <div className="mx-auto max-w-4xl space-y-4 text-center font-bold">
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                className="mx-auto max-w-4xl space-y-4 text-center font-bold"
+            >
                 <div className="text-xxl ">
                     We Provide Only Authenticated Parts
                 </div>
@@ -20,20 +25,27 @@ function Priority() {
                     as through our extensive network of franchised distributors
                     and qualified OEM vendors.
                 </div>
-            </div>
-            <Image
-                src="/images/sample.webp"
-                width={0}
-                height={0}
-                sizes="100vw"
-                alt="asd"
-                className="mx-auto w-full max-w-4xl rounded-[20%] shadow-2xl"
-            />
-            <div className="mx-auto max-w-4xl space-y-4 text-center font-bold">
-                {/* <h1 className="text-lg ">
-                    In Lorem sit consectetur enim ipsum magna voluptate magna
-                    exercitation.
-                </h1> */}
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+            >
+                <Image
+                    src="/images/sample.webp"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    alt="asd"
+                    className="mx-auto w-full max-w-4xl rounded-[20%] shadow-2xl"
+                />
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+                className="mx-auto max-w-4xl space-y-4 text-center font-bold"
+            >
                 <div>
                     We provide a distinctive solution to tier-1, tier-2, and
                     tier-3 OEMs and CMs who are in need of reliable and
@@ -46,11 +58,11 @@ function Priority() {
                     Electronics Inc. are mandatory tested and authenticated by
                     White Horse Laboratories.
                 </div>
-            </div>
+            </motion.div>
             <motion.div
-                // initial={{ opacity: 0, marginLeft: '100vw' }}
-                // whileInView={{ opacity: 1, marginLeft: 0 }}
-                // transition={{ duration: 1 }}
+                initial={{ opacity: 0, y: '100%' }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
                 className="mx-auto flex flex-col rounded-lg  bg-slate-300 bg-opacity-40 p-8 font-bold dark:bg-slate-700 md:flex-row"
             >
                 <div className="flex-1">
@@ -134,9 +146,15 @@ function Priority() {
                     </ul>
                 </div>
             </motion.div>
-            <Link href={'/about-us'} className="mt-4 block">
-                <Button className="mx-auto px-20">About Us</Button>
-            </Link>
+            <motion.div
+                initial={{ opacity: 0, y: '100%' }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+            >
+                <Link href={'/about-us'} className="mt-4 block">
+                    <Button className="mx-auto px-20">About Us</Button>
+                </Link>
+            </motion.div>
         </section>
     );
 }

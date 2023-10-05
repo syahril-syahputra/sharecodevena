@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'flowbite-react';
 import Link from 'next/link';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const ServiceBox = (props: {
     title: string;
@@ -14,7 +15,12 @@ const ServiceBox = (props: {
     icon: IconDefinition;
 }) => {
     return (
-        <div className=" rounded-lg bg-white bg-gradient-to-b from-white to-slate-100 px-4 py-2 dark:bg-cyan-800 dark:from-cyan-600 dark:to-cyan-700  ">
+        <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            className=" rounded-lg bg-white bg-gradient-to-b from-white to-slate-100 px-4 py-2 dark:bg-cyan-800 dark:from-cyan-600 dark:to-cyan-700  "
+        >
             <div className="mb-4 mt-4 flex flex-1 items-center space-x-4 ">
                 <div className="aspect-square  rounded-full bg-cyan-600 p-4 dark:bg-white">
                     <FontAwesomeIcon
@@ -30,14 +36,19 @@ const ServiceBox = (props: {
                     <div className="line-clamp-2">{props.desc}</div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 export default function Services() {
     return (
         <div className="relative overflow-hidden bg-slate-300 py-8 dark:bg-slate-700">
             <div className="container items-center space-y-4 md:flex md:space-x-28 md:space-y-0">
-                <div className="flex-1">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 1.5 }}
+                    className="flex-1"
+                >
                     <div className="text-xxl font-bold text-gray-700 dark:text-white">
                         Our services
                     </div>
@@ -48,7 +59,7 @@ export default function Services() {
                     <Link href={'/services'}>
                         <Button className="mt-8 font-bold">Read more</Button>
                     </Link>
-                </div>
+                </motion.div>
                 <div className="flex-1 space-y-4">
                     <ServiceBox
                         icon={faClipboardList}
