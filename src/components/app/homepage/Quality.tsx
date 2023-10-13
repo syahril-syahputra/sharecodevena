@@ -27,8 +27,8 @@ export default function Quality() {
                 </motion.div>
 
                 <motion.div
-                    initial={{ opacity: 0, x: '100%' }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: '-100%' }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
                     className="flex-1 space-y-8 py-8 pr-4 text-gray-700 dark:text-white"
                 >
