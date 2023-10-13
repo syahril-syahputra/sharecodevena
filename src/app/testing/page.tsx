@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function page() {
-    return <div>Only For Testing and deploy automaticly part 2</div>;
+    return <div>Testing this is production</div>;
 }
