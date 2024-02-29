@@ -52,7 +52,7 @@ export default function TopNavbar() {
                                 icon={faPhoneFlip}
                                 className="h-[15px] text-[15px] text-white"
                             />
-                            <label>+17149090029</label>
+                            <label>+1 236 994 0029</label>
                         </li>
                     </ul>
                     <ButtonTheme />
