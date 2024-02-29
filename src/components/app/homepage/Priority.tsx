@@ -20,10 +20,10 @@ function Priority() {
                     We Provide Only Authenticated Parts
                 </div>
                 <div>
-                    Venatronics. excels in offering genuine electronic
-                    components directly from manufacturers, as well as through
-                    our extensive network of franchised distributors and
-                    qualified OEM vendors.
+                    Venatronics excels in offering genuine electronic components
+                    directly from manufacturers, as well as through our
+                    extensive network of franchised distributors and qualified
+                    OEM vendors.
                 </div>
             </motion.div>
             <motion.div
@@ -50,11 +50,11 @@ function Priority() {
                     We provide a distinctive solution to tier-1, tier-2, and
                     tier-3 OEMs and CMs who are in need of reliable and
                     authenticated obsolete electronic components. As part of our
-                    service, every purchase order from Venatronics. undergoes a
+                    service, every purchase order from Venatronics undergoes a
                     thorough Quality Inspection. We are dedicated to combating
                     counterfeit products and offer authentication and testing
                     services for electronic components, along with value-added
-                    services. All orders placed with Venatronics. are mandatory
+                    services. All orders placed with Venatronics are mandatory
                     tested and authenticated by White Horse Laboratories.
                 </div>
             </motion.div>

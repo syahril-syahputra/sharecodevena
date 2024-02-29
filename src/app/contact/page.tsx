@@ -40,7 +40,7 @@ export default function page() {
                     <div>
                         <FontAwesomeIcon icon={faPhoneFlip} />
                         {` `}
-                        +17149090029
+                        +1 236 994 0029
                     </div>
                 </div>
             </div>
