@@ -6,8 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { ThemeProvider } from './ThemeProvider';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
-import Footer from '@/components/base/Footer';
-import NavbarComponent from '@/components/base/Navbar';
+import Providers from './providers';
 config.autoAddCss = false;
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,23 +28,8 @@ export default function RootLayout({
                     defaultTheme="system"
                     // enableSystem
                 >
-                    <div className="flex min-h-screen flex-col ">
-                        <div className="relative overflow-auto">
-                            <NavbarComponent />
-                        </div>
-                        <main className="relative mt-[128px] flex-1 py-4">
-                            {children}
-                        </main>
-                        <Footer />
-                    </div>
+                    <Providers>{children}</Providers>
                 </ThemeProvider>
-                {/* <Providers>
-                    <div className="flex min-h-screen flex-col ">
-                        <Navbar />
-                        <div className="container flex-1 py-4">{children}</div>
-                        <Footer />
-                    </div>
-                </Providers> */}
             </body>
         </html>
     );
