@@ -1,49 +1,7 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from 'flowbite-react';
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const SearchProduct = () => {
-    return (
-        <form className="">
-            <div className="flex items-center rounded-lg bg-white  pl-2 dark:bg-slate-900">
-                <FontAwesomeIcon
-                    icon={faSearch}
-                    className="text-gray-500 dark:text-white"
-                />
-                <input
-                    type="search"
-                    id="default-search"
-                    className="w-24 flex-1 border-none border-transparent bg-transparent text-gray-600 focus:border-transparent focus:ring-0 dark:text-white"
-                    placeholder="Search for your parts through our 5,000,000 database"
-                    required
-                />
-
-                <Button type="submit">Search</Button>
-            </div>
-        </form>
-    );
-};
-const Hot = () => {
-    return (
-        <div className="flex  pt-4">
-            <span className="font-bold text-teal-400">HOT</span>
-            <ul className="row-span-2 grid h-12 flex-1 grid-cols-2 gap-1 overflow-hidden text-sm text-gray-200 md:grid-cols-5">
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-                <li>VNH5180ATR-E</li>
-            </ul>
-        </div>
-    );
-};
+import SearchProduct from '@/components/SearchProduct/SearchProduct';
+import HotProduct from '@/components/SearchProduct/HotProduct';
 
 function HomePageBanner() {
     return (
@@ -64,7 +22,7 @@ function HomePageBanner() {
                     className="mx-auto max-w-3xl bg-slate-600 bg-opacity-25 p-2 "
                 >
                     <SearchProduct />
-                    <Hot />
+                    <HotProduct />
                 </motion.div>
             </div>
             <div className="h-[500px] w-full overflow-scroll md:h-full">
