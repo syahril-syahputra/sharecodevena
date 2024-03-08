@@ -1,14 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import SearchProduct from '@/components/SearchProduct/SearchProduct';
 import SkeletonTable from '@/components/Skeleton/SkeletonTable';
 import { api } from '@/utils/axios';
 import { Pagination, Table } from 'flowbite-react';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 interface PageProps {
     searchParams: { [key: string]: string };
 }
-
+type InventoryItem = {
+    slug_product: string;
+    slug_part_number: string;
+    part_number: string;
+    manufacturer: string;
+    description: string;
+    available_quantity: number;
+};
 export default function Page({ searchParams }: PageProps) {
     const [text, settext] = useState(searchParams.q || '');
     const [currentPage, setCurrentPage] = useState(1);
@@ -73,7 +80,20 @@ export default function Page({ searchParams }: PageProps) {
                             <Table.HeadCell>Action</Table.HeadCell>
                         </Table.Head>
                         <Table.Body className="divide-y">
-                            {data.map((item: any, index) => {
+                            {data.length === 0 && (
+                                <Table.Row
+                                    key={0}
+                                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                >
+                                    <Table.Cell
+                                        colSpan={6}
+                                        className="text-center text-red-500"
+                                    >
+                                        Data Not Found
+                                    </Table.Cell>
+                                </Table.Row>
+                            )}
+                            {data.map((item: InventoryItem, index) => {
                                 return (
                                     <Table.Row
                                         key={index}
@@ -92,12 +112,12 @@ export default function Page({ searchParams }: PageProps) {
                                             {item.available_quantity}
                                         </Table.Cell>
                                         <Table.Cell className="space-x-4">
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href={`/product/${item.slug_part_number}/${item.slug_product}`}
                                                 className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                                             >
                                                 Detail
-                                            </a>
+                                            </Link>
                                             <a
                                                 href="#"
                                                 className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
