@@ -31,5 +31,9 @@ export default function SkeletonTable(props: IProps) {
 
         return columns;
     };
-    return <table className="w-full animate-pulse">{renderRows()}</table>;
+    return (
+        <table className="w-full animate-pulse">
+            <tbody>{renderRows()}</tbody>
+        </table>
+    );
 }

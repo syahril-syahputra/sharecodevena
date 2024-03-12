@@ -9,6 +9,11 @@ interface IProps {
     onClick: () => void;
 }
 export default function SearchProduct(props: IProps) {
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            props.onClick();
+        }
+    };
     return (
         <div className="">
             <div className="flex items-center rounded-lg border border-gray-300 bg-white pl-2 dark:border-none dark:bg-slate-900">
@@ -19,6 +24,7 @@ export default function SearchProduct(props: IProps) {
                 <input
                     type="search"
                     id="default-search"
+                    onKeyDown={handleKeyDown} // Tambahkan event handler untuk keydown
                     value={props.value}
                     onChange={(v) => {
                         props.onChange(v.target.value);
