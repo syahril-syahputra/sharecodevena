@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import SearchProduct from '@/components/SearchProduct/SearchProduct';
 import HotProduct from '@/components/SearchProduct/HotProduct';
+import { useRouter } from 'next/navigation';
 
 function HomePageBanner() {
+    const [search, setsearch] = useState('');
+
+    const router = useRouter();
     return (
         <div className="relative flex h-auto min-h-full w-full items-center ">
             <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  space-y-10 text-center text-white">
@@ -21,7 +25,13 @@ function HomePageBanner() {
                     transition={{ duration: 1 }}
                     className="mx-auto max-w-3xl bg-slate-600 bg-opacity-25 p-2 "
                 >
-                    <SearchProduct />
+                    <SearchProduct
+                        value={search}
+                        onChange={setsearch}
+                        onClick={() =>
+                            search && router.push('/product/search?q=' + search)
+                        }
+                    />
                     <HotProduct />
                 </motion.div>
             </div>
