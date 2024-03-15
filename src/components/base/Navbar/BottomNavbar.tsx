@@ -2,6 +2,8 @@ import React from 'react';
 import { Navbar } from 'flowbite-react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+// import Link from 'next/link';
+// import { signIn } from 'next-auth/react';
 
 export default function BottomNavbar() {
     const pathname = usePathname();
@@ -22,6 +24,43 @@ export default function BottomNavbar() {
                             height={100}
                         />
                     </Navbar.Brand>
+                    {/* <div className="flex  md:order-2">
+                        <div className=" hidden items-center space-x-4 md:flex">
+                            <Link href={'/auth/register'}>
+                                <span>Register</span>
+                            </Link>
+                            <Button size="xs" onClick={() => signIn()}>
+                                Login
+                            </Button>
+                        </div>
+                        {/* <Dropdown
+                            arrowIcon={false}
+                            inline
+                            // placement="left"
+                            label={
+                                <Avatar
+                                    alt="User settings"
+                                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                    rounded
+                                />
+                            }
+                        >
+                            <Dropdown.Header>
+                                <span className="block text-sm">
+                                    Bonnie Green
+                                </span>
+                                <span className="block truncate text-sm font-medium">
+                                    name@flowbite.com
+                                </span>
+                            </Dropdown.Header>
+                            <Dropdown.Item>Dashboard</Dropdown.Item>
+                            <Dropdown.Item>Settings</Dropdown.Item>
+                            <Dropdown.Item>Earnings</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item>Sign out</Dropdown.Item>
+                        </Dropdown> */}
+
+                    {/* </div> */}
                     <Navbar.Toggle />
                     <Navbar.Collapse>
                         <Navbar.Link href="/" active={pathname === '/'}>
@@ -66,6 +105,18 @@ export default function BottomNavbar() {
                         >
                             Contact
                         </Navbar.Link>
+                        {/* <div className=" my-8 flex flex-col items-center space-y-4 border-t py-4 md:hidden">
+                            <Link href={'/auth/register'}>
+                                <span>Register</span>
+                            </Link>
+                            <Button
+                                className="w-full"
+                                size="xs"
+                                onClick={() => signIn()}
+                            >
+                                Login
+                            </Button>
+                        </div> */}
                     </Navbar.Collapse>
                 </Navbar>
             </div>

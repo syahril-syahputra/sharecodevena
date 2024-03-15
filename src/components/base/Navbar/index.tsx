@@ -5,7 +5,7 @@ import BottomNavbar from './BottomNavbar';
 
 export default function NavbarComponent() {
     return (
-        <div className="fixed z-10 w-full overflow-auto">
+        <div className="fixed z-10 w-full ">
             <TopNavbar />
             <BottomNavbar />
         </div>

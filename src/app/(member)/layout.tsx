@@ -1,6 +1,9 @@
+'use client';
 import React from 'react';
 import DashboardDrawer from '@/components/base/Dashboard/Drawer';
+// import { useSession } from 'next-auth/react';
 export default function Layout({ children }: { children: React.ReactNode }) {
+    // const { data: session, status } = useSession();
     return (
         <div className="flex min-h-screen flex-col ">
             <DashboardDrawer />

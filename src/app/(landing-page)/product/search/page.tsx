@@ -2,7 +2,7 @@
 import SearchProduct from '@/components/SearchProduct/SearchProduct';
 import SkeletonTable from '@/components/Skeleton/SkeletonTable';
 import { api } from '@/utils/axios';
-import { Pagination, Table } from 'flowbite-react';
+import { Button, Pagination, Table } from 'flowbite-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 interface PageProps {
@@ -110,8 +110,14 @@ export default function Page({ searchParams }: PageProps) {
                                         <Table.Cell>
                                             {item.description}
                                         </Table.Cell>
-                                        <Table.Cell className="text-right">
-                                            {item.available_quantity}
+                                        <Table.Cell className="items-end text-right">
+                                            {/* {item.available_quantity} */}
+                                            <Button
+                                                disabled
+                                                className="float-right"
+                                            >
+                                                Show
+                                            </Button>
                                         </Table.Cell>
                                         <Table.Cell className="space-x-4">
                                             <Link
