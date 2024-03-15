@@ -14,7 +14,7 @@ export default function CompanyBottom() {
             <a href="https://venatronics.com/" className="flex items-center">
                 <Image
                     src="/logo.png"
-                    alt="FlowBite Logo"
+                    alt="Venatronics Logo"
                     width={200}
                     className="dark:filter-dark-mode"
                     height={200}
