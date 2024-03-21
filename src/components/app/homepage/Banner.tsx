@@ -17,6 +17,7 @@ function HomePageBanner() {
                     className=" h-full w-full object-cover "
                     autoPlay
                     muted
+                    onContextMenu={(e) => e.preventDefault()}
                 ></video>
             </div>
             <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  space-y-10 text-center text-white">
