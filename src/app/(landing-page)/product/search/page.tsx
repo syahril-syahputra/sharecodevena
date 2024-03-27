@@ -1,7 +1,7 @@
 'use client';
 import SearchProduct from '@/components/SearchProduct/SearchProduct';
 import SkeletonTable from '@/components/Skeleton/SkeletonTable';
-import { api } from '@/utils/axios';
+import fetchClient from '@/utils/FetchClient';
 import { Button, Pagination, Table } from 'flowbite-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -42,9 +42,12 @@ export default function Page({ searchParams }: PageProps) {
     async function fetchData() {
         try {
             setisSearching(true);
-            const res = await api.get(
-                `/products?page=${currentPage}&paginate=10&sort_by=part_number&sort_type=desc&keyword=${text}`
-            );
+            // const res = await api.get(
+            //     `/products?page=${currentPage}&paginate=10&sort_by=part_number&sort_type=desc&keyword=${text}`
+            // );
+            const res = await fetchClient({
+                url: `/products?page=${currentPage}&paginate=10&sort_by=part_number&sort_type=desc&keyword=${text}`,
+            });
             setdata(res.data.data.items);
             settotalPage(res.data.data.meta.total_page);
             // console.log(res.data.data.items);

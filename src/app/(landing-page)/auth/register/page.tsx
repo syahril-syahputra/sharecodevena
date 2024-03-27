@@ -1,7 +1,11 @@
 'use client';
+import fetchClient from '@/utils/FetchClient';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
-import React from 'react';
+import axios from 'axios';
+import { Alert, Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -14,7 +18,11 @@ interface FormInputs {
     password_confirmation: string;
     subscribe_newsletter?: boolean;
 }
+
+type FormErrorKeys = keyof FormInputs;
 export default function Page() {
+    const [errorResponse, seterrorResponse] = useState('');
+
     const scheme = yup.object({
         first_name: yup.string().required().label('Password'),
         last_name: yup.string().required().label('Password'),
@@ -33,15 +41,55 @@ export default function Page() {
     const {
         handleSubmit,
         register,
+        setError,
         formState: { errors, isSubmitting },
     } = useForm<FormInputs>({
         mode: 'onChange',
         resolver: yupResolver(scheme),
     });
 
-    function onsubmit(data: FormInputs) {
+    async function onsubmit(data: FormInputs) {
         // handle submitting the form
-        console.log(data);
+        const dataRequest = {
+            first_name: data.first_name,
+            last_name: data.last_name,
+            company_name: data.company_name,
+            email: data.email,
+            password: data.password,
+            password_confirmation: data.password_confirmation,
+            subscribe_newsletter: data.subscribe_newsletter,
+        };
+        seterrorResponse('');
+        try {
+            await fetchClient({
+                method: 'POST',
+                url: '/auth/register',
+                body: dataRequest,
+            });
+
+            await signIn('credentials', {
+                email: data.email,
+                password: data.password,
+                remember_me: false,
+                callbackUrl: '/',
+            });
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response?.data.errors) {
+                    const obj = error.response?.data.errors;
+
+                    for (const [key, value] of Object.entries(obj)) {
+                        if (key in scheme.fields) {
+                            setError(key as FormErrorKeys, {
+                                type: 'custom',
+                                message: value as string,
+                            });
+                        }
+                    }
+                }
+                seterrorResponse(error.response?.data.message);
+            }
+        }
     }
     return (
         <div className="container  mt-8 pt-4">
@@ -164,9 +212,28 @@ export default function Page() {
                             Inform me about product updates, new arrivals
                         </Label>
                     </div>
-                    <Button type="submit" isProcessing={isSubmitting}>
-                        Submit
-                    </Button>
+                    {errorResponse && (
+                        <Alert color="failure">
+                            <span className="font-medium">Register Failed</span>{' '}
+                            {errorResponse}
+                        </Alert>
+                    )}
+
+                    <div className="flex flex-col items-center justify-center space-y-4">
+                        <div className="text-sm ">
+                            By registering to Venatronics, you agree to the{' '}
+                            <Link
+                                href={'/privacy-policy'}
+                                className="font-bold"
+                                target="_blank"
+                            >
+                                Privacy and Policy
+                            </Link>
+                        </div>
+                        <Button type="submit" isProcessing={isSubmitting}>
+                            Submit
+                        </Button>
+                    </div>
                 </form>
             </div>
         </div>

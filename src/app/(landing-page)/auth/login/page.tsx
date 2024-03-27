@@ -1,11 +1,11 @@
 'use client';
-import { api } from '@/utils/axios';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -16,6 +16,8 @@ interface FormInputs {
     rememberMe?: boolean;
 }
 export default function Page() {
+    const searchParams = useSearchParams();
+    const error = searchParams.get('error');
     const [loginFail, setloginFail] = useState(false);
     const scheme = yup.object({
         email: yup.string().required().email().label('Email'),
@@ -34,12 +36,17 @@ export default function Page() {
         setloginFail(false);
         // handle submitting the form
         try {
+            const callbackUrl = searchParams.get('callbackUrl') || '/';
             const request = await signIn('credentials', {
                 email: data.email,
                 password: data.password,
                 remember_me: data.rememberMe,
-                redirect: false,
+                callbackUrl: callbackUrl,
             });
+            // console.log(request);
+            // if (request) {
+            //     router.push(request.url || '');
+            // }
             if (request?.error) {
                 setloginFail(true);
             }
@@ -47,22 +54,10 @@ export default function Page() {
             console.log(error);
         }
     }
-    async function testing() {
-        try {
-            const response = await api.get('/user/me', {
-                headers: {
-                    // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjb2RlYmFzZS1hcHAiLCJzdWIiOiJFbG1lcl9Ib2RraWV3aWN6NjVAZXhhbXBsZS5vcmciLCJleHAiOjE3MTA4NDc1NjYsIm5iZiI6MTcxMDc2MTE2NiwiaWF0IjoxNzEwNzYxMTY2fQ.QrORpd-771v1yqLJUUP0zsWlxE91x8UPbqB81JLOEYc`,
-                },
-            });
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+
     return (
         <div className="container  mt-8 pt-4">
             <div className="mx-auto max-w-xl">
-                <button onClick={testing}>Testing</button>
                 <form
                     className=" space-y-4 rounded-xl border p-8 dark:border-slate-400"
                     onSubmit={handleSubmit(onsubmit)}
@@ -124,12 +119,22 @@ export default function Page() {
                             Your Account Not Found
                         </Alert>
                     )}
-
+                    <FormError error={error} />
                     <Button type="submit" isProcessing={isSubmitting}>
                         Submit
                     </Button>
                 </form>
             </div>
         </div>
+    );
+}
+function FormError({ error }: { error: string | null }) {
+    if (!error) return null;
+
+    return (
+        <Alert color="failure">
+            <FontAwesomeIcon icon={faCircleExclamation} className="mr-4" />
+            <span className="font-medium">Login Failed! </span> {error}
+        </Alert>
     );
 }

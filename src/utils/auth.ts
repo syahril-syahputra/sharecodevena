@@ -5,10 +5,10 @@ import { api } from './axios';
 export const authOptions: NextAuthOptions = {
     pages: {
         signIn: '/auth/login',
+        error: '/auth/login',
     },
     session: {
         strategy: 'jwt',
-        maxAge: parseInt(process.env.NEXTAUTH_JWT_AGE!) || 1209600,
     },
     providers: [
         CredentialsProvider({
@@ -25,23 +25,24 @@ export const authOptions: NextAuthOptions = {
                     });
 
                     const user = response.data;
-                    console.log(user);
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
                     if (user) {
                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         const result: any = {
                             email: credentials.email,
-                            token: user.data.access_token,
+                            accessToken: response.data.data.access_token,
                         };
+
                         return result;
                     }
 
                     return null;
                 } catch (error) {
-                    // Handle errors appropriately (e.g., display error message to user)
-                    console.error('Login error:', error);
-                    throw error; // Re-throw for further handling
+                    if (error instanceof Response) {
+                        return null;
+                    }
+
+                    throw new Error('Account Not Found');
                 }
             },
         }),
@@ -51,16 +52,13 @@ export const authOptions: NextAuthOptions = {
             if (user) {
                 return { ...token, ...user };
             }
-            // if (account?.provider === 'credentials') {
-            //     token.user = user;
-            //     token.email = user.email;
-            // }
+
             return token;
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         async session({ session, token }: any) {
             session.accessToken = token.accessToken;
-            session.user.email = token.email;
+            // session.user.email = token.email;
 
             return session;
         },

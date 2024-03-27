@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { api } from '@/utils/axios';
+import fetchServer from '@/utils/fetchServer';
+import { getCurrentUser } from '@/utils/session';
 async function getData(slug: string) {
     try {
-        const res = await api.get('/products/' + slug);
+        const res = await fetchServer({ url: '/products/' + slug });
+        console.log(res);
         return res.data.data;
     } catch (error) {
         return notFound();
@@ -30,17 +32,8 @@ function ItemList(props: {
         </div>
     );
 }
-export default async function page({ params }: { params: { slug: string } }) {
-    // try {
-    //     const res = await getData();
-    //     console.log(res);
-    // } catch (error) {
-    //     return notFound();
-    // }
-    // if (!params.slug) {
-    //     return notFound();
-    // }
-    // const partNumber = params.slug[0];
+export default async function Page({ params }: { params: { slug: string } }) {
+    const user = await getCurrentUser();
     const partId = params.slug[1];
     const res = await getData(partId);
 
@@ -53,12 +46,12 @@ export default async function page({ params }: { params: { slug: string } }) {
                 <div className=" grid w-full grid-cols-1 py-8  md:grid-cols-2">
                     <ItemList title="Packaging" value={res.packaging} />
                     <ItemList
-                        hideValue
+                        hideValue={!user}
                         title="Date Code"
                         value={res.date_code}
                     />
                     <ItemList
-                        hideValue
+                        hideValue={!user}
                         title="Available Quantity"
                         value={res.available_quantity}
                     />
