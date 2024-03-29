@@ -185,7 +185,11 @@ export default function Page() {
                                 {errorResponse}
                             </Alert>
                         )}
-                        <Button type="submit" isProcessing={isSubmitting}>
+                        <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            isProcessing={isSubmitting}
+                        >
                             Submit
                         </Button>
                     </form>

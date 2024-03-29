@@ -3,6 +3,7 @@ import React from 'react';
 
 import { api } from '@/utils/axios';
 import fetchClient from '@/utils/FetchClient';
+import { useSession } from 'next-auth/react';
 export default function Page() {
     async function testing() {
         try {
@@ -50,11 +51,25 @@ export default function Page() {
             console.log(error);
         }
     }
+    const { data: session, update } = useSession();
+    async function cobaverifikasi() {
+        await update({
+            email_verified_at: 'aaa',
+        });
+    }
+    async function cobanull() {
+        await update({
+            email_verified_at: 'delete',
+        });
+    }
     return (
         <div>
             <button onClick={testing}>Testing</button> |
-            <button onClick={cobalogin}>Coba Login</button>
-            Testing this is production
+            <button onClick={cobalogin}>Coba Login</button> |
+            <button onClick={cobaverifikasi}>sudahverifikasi</button>
+            <button onClick={cobanull}>belum verifikasi</button>
+            <hr />
+            {JSON.stringify(session)}
         </div>
     );
 }

@@ -9,8 +9,8 @@ import React from 'react';
 
 export default function page() {
     return (
-        <div className=" bottom-0 left-0 right-0 top-0 flex min-h-[500px]   items-center justify-center bg-[url('/images/contactus.jpg')] bg-cover py-8 text-center">
-            <div className="mx-4 rounded-xl bg-white bg-opacity-90 p-8 shadow-2xl dark:bg-black dark:bg-opacity-40">
+        <div className=" bottom-0 left-0 right-0 top-0 flex min-h-[500px]   items-center justify-center bg-cover py-8 text-center">
+            <div className="mx-4 rounded-xl  border p-8">
                 <a
                     href="https://venatronics.com/"
                     className="flex items-center"

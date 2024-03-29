@@ -16,7 +16,8 @@ async function fetchClient({
 }: fetchClientProps) {
     try {
         const session = await getSession();
-        const accessToken = token || session?.accessToken;
+        const accessToken = token || session?.access_token;
+        console.log(session);
 
         const response = api({
             method: method,

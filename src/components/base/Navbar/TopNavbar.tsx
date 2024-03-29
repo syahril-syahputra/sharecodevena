@@ -19,22 +19,29 @@ async function getDataUser() {
     try {
         if (session) {
             const response = await fetchServer({ url: '/user/me' });
-            // console.log(response.data.data.email_verified_at);
+
             return response.data.data.email_verified_at;
         } else {
             return true;
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return true;
     }
 }
 
 export default async function TopNavbar() {
-    const res = await getDataUser();
+    const session = await getCurrentUser();
+    let verified = true;
+    if (session && !session?.email_verified_at) {
+        const res = await getDataUser();
+        if (!res) {
+            verified = false;
+        }
+    }
     return (
         <>
-            {!res && <ResendVerificationEmail />}
+            {!verified && <ResendVerificationEmail />}
             <div className=" bg-slate-700 py-2 text-white">
                 <div className="container flex items-center justify-between">
                     <div className="space-x-4">

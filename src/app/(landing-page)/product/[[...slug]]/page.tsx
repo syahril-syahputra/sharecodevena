@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const res = await getData(partId);
 
     return (
-        <div className="container py-4">
+        <div className="container pt-20">
             <div className="mx-auto rounded-xl border border-gray-500 p-8  md:w-2/3">
                 <h1>{res.part_number}</h1>
                 <h2>{res.manufacturer}</h2>

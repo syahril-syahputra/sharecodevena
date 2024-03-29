@@ -22,6 +22,7 @@ export default function Page({ searchParams }: PageProps) {
     const [isSearching, setisSearching] = useState(false);
     const [totalPage, settotalPage] = useState(0);
     const [data, setdata] = useState([]);
+    const [suggestion, setsuggestion] = useState([]);
 
     useEffect(() => {
         console.log('ganti karna page ' + currentPage);
@@ -50,6 +51,12 @@ export default function Page({ searchParams }: PageProps) {
             });
             setdata(res.data.data.items);
             settotalPage(res.data.data.meta.total_page);
+
+            const suggest = await fetchClient({
+                url: `/product/suggestion?keyword=${text}&take=5`,
+            });
+            setsuggestion(suggest.data.data);
+
             // console.log(res.data.data.items);
         } catch (error) {
             console.log(error);
@@ -61,7 +68,7 @@ export default function Page({ searchParams }: PageProps) {
     const onPageChange = (page: number) => setCurrentPage(page);
 
     return (
-        <div className="container space-y-8 py-8">
+        <div className="container space-y-8 pb-4 pt-24">
             <h1 className="text-lg font-semibold">Search Product</h1>
             <div>
                 <SearchProduct
@@ -69,6 +76,16 @@ export default function Page({ searchParams }: PageProps) {
                     onChange={settext}
                     onClick={fetchData}
                 />
+                {suggestion.length > 0 && !isSearching && (
+                    <div className="flex space-x-4 py-4">
+                        <span className="font-bold">Suggestion</span>
+                        <ul className="flex space-x-4 text-sm font-semibold underline">
+                            {suggestion.map((item) => (
+                                <li key={item}>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
             {isSearching && <SkeletonTable row={5} />}
             {!isSearching && (
@@ -129,12 +146,12 @@ export default function Page({ searchParams }: PageProps) {
                                             >
                                                 Detail
                                             </Link>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href={`/product/inquiry/${item.slug_product}`}
                                                 className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                                             >
                                                 Inquiry
-                                            </a>
+                                            </Link>
                                         </Table.Cell>
                                     </Table.Row>
                                 );

@@ -27,13 +27,7 @@ export const authOptions: NextAuthOptions = {
                     const user = response.data;
 
                     if (user) {
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        const result: any = {
-                            email: credentials.email,
-                            accessToken: response.data.data.access_token,
-                        };
-
-                        return result;
+                        return response.data.data;
                     }
 
                     return null;
@@ -48,7 +42,10 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ token, user, trigger, session }) {
+            if (trigger === 'update') {
+                token.email_verified_at = session.email_verified_at;
+            }
             if (user) {
                 return { ...token, ...user };
             }
@@ -57,8 +54,13 @@ export const authOptions: NextAuthOptions = {
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         async session({ session, token }: any) {
-            session.accessToken = token.accessToken;
-            // session.user.email = token.email;
+            session.access_token = token.access_token;
+            session.user.company_name = token.company_name || '';
+            session.user.ulid = token.ulid || '';
+            session.user.email = token.email || '';
+            session.user.first_name = token.first_name || '';
+            session.user.last_name = token.last_name || '';
+            session.user.email_verified_at = token.email_verified_at || '';
 
             return session;
         },

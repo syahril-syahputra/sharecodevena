@@ -24,6 +24,10 @@ export async function middleware(request: NextRequest) {
         //         new URL('/admin/superadmin', request.url)
         //     );
         // }
+    } else {
+        if (request.nextUrl.pathname.startsWith('/product/inquiry/')) {
+            return NextResponse.redirect(new URL('/auth/login', request.url));
+        }
     }
 }
 

@@ -230,7 +230,11 @@ export default function Page() {
                                 Privacy and Policy
                             </Link>
                         </div>
-                        <Button type="submit" isProcessing={isSubmitting}>
+                        <Button
+                            type="submit"
+                            disabled={isSubmitting}
+                            isProcessing={isSubmitting}
+                        >
                             Submit
                         </Button>
                     </div>

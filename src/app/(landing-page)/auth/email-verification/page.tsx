@@ -1,7 +1,8 @@
 'use client';
 import fetchClient from '@/utils/FetchClient';
 import { Spinner } from 'flowbite-react';
-import { useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { redirect, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -14,7 +15,7 @@ export default function Page() {
 
     const [isVerified, setisVerified] = useState(false);
     const [isFailed, setisFailed] = useState(false);
-
+    const { update } = useSession();
     async function resend() {
         await fetchClient({
             url: 'auth/resend-verification',
@@ -23,7 +24,7 @@ export default function Page() {
         router.push('/');
     }
     useEffect(() => {
-        async function fetchData() {
+        const fetchData = async () => {
             try {
                 await fetchClient({
                     url: '/auth/email-verification',
@@ -41,13 +42,22 @@ export default function Page() {
                 console.log(error);
                 setisFailed(true);
             }
-        }
+        };
         fetchData();
     }, []);
+    const verifingSession = async () => {
+        await update({
+            email_verified_at: 'verified',
+        });
+    };
     useEffect(() => {
         if (isVerified) {
+            if (timer === 1) {
+                verifingSession();
+            }
             if (timer === 0) {
-                router.push('/');
+                router.refresh();
+                redirect('/');
             }
 
             // exit early when we reach 0

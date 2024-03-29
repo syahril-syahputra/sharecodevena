@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function page() {
     return (
-        <div className="container py-8">
+        <div className="container pt-20">
             <h1>About Us</h1>
             Welcome to Venatronics LLC, a premier independent distributor and
             representative of electronic component manufacturers. Our expertise

@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert, Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -31,7 +31,7 @@ export default function Page() {
         mode: 'onChange',
         resolver: yupResolver(scheme),
     });
-
+    const router = useRouter();
     async function onsubmit(data: FormInputs) {
         setloginFail(false);
         // handle submitting the form
@@ -41,14 +41,16 @@ export default function Page() {
                 email: data.email,
                 password: data.password,
                 remember_me: data.rememberMe,
+                redirect: false,
                 callbackUrl: callbackUrl,
             });
             // console.log(request);
-            // if (request) {
-            //     router.push(request.url || '');
-            // }
+
             if (request?.error) {
                 setloginFail(true);
+            } else {
+                router.refresh();
+                router.push(callbackUrl || '');
             }
         } catch (error) {
             console.log(error);
@@ -120,7 +122,11 @@ export default function Page() {
                         </Alert>
                     )}
                     <FormError error={error} />
-                    <Button type="submit" isProcessing={isSubmitting}>
+                    <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        isProcessing={isSubmitting}
+                    >
                         Submit
                     </Button>
                 </form>

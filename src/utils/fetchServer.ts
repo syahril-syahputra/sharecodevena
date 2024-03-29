@@ -25,7 +25,7 @@ async function fetchServer({
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + session?.accessToken,
+                Authorization: 'Bearer ' + session?.access_token,
             },
         });
 

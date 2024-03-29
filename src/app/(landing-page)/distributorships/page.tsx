@@ -20,10 +20,14 @@ const ImageBorder = (props: { src: string; href: string }) => {
 };
 export default function page() {
     return (
-        <div className="container py-8">
-            <h1>Our Distributships</h1>
+        <div className="">
+            <div className="relative flex h-auto w-full items-center bg-slate-700 ">
+                <div className="container pb-12 pt-24">
+                    <h1 className="text-[48px]">Distributors</h1>
+                </div>
+            </div>
 
-            <div className="grid-col-1 grid justify-around  gap-4 md:grid-cols-5 ">
+            <div className="grid-col-1 container grid justify-around gap-4  py-8 md:grid-cols-5 ">
                 <ImageBorder
                     src={'/images/distributorships/eyctech.png'}
                     href="https://www.eyc-tech.com/"

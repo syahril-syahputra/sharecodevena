@@ -9,8 +9,8 @@ function HomePageBanner() {
 
     const router = useRouter();
     return (
-        <div className="relative flex h-auto min-h-full w-full items-center ">
-            <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  space-y-10 text-center text-white">
+        <div className="relative flex h-auto min-h-full w-full items-center  pb-24 pt-24 ">
+            <div className="container  space-y-10 text-center ">
                 <motion.span
                     initial={{ opacity: 0, marginBottom: '300px' }}
                     whileInView={{ opacity: 1, marginBottom: '40px' }}
@@ -34,15 +34,6 @@ function HomePageBanner() {
                     />
                     <HotProduct />
                 </motion.div>
-            </div>
-            <div className="h-[500px] w-full overflow-scroll md:h-full">
-                <video
-                    loop
-                    src="/videos/banner.mp4"
-                    className=" h-full w-full object-cover "
-                    autoPlay
-                    muted
-                ></video>
             </div>
         </div>
     );
