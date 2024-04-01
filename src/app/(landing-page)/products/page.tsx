@@ -147,7 +147,7 @@ export default function page() {
 
     return (
         <div>
-            <div className="relative flex h-auto w-full items-center bg-slate-700 ">
+            <div className="relative flex h-auto w-full items-center bg-slate-300 dark:bg-slate-700">
                 <div className="container pb-12 pt-24">
                     <h1 className="text-[48px]">Our Products</h1>
                     <span className="font-bold] mb-8 flex-wrap text-lg">

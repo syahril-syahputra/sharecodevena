@@ -4,7 +4,7 @@ import React from 'react';
 export default function page() {
     return (
         <div>
-            <div className="relative flex h-auto w-full items-center bg-slate-700 ">
+            <div className="relative flex h-auto w-full items-center bg-slate-300 dark:bg-slate-700 ">
                 <div className="container pb-12 pt-24">
                     <h1 className="text-[48px]">Quality</h1>
                 </div>

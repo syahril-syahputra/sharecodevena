@@ -31,12 +31,14 @@ export const authOptions: NextAuthOptions = {
                     }
 
                     return null;
-                } catch (error) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                } catch (error: any) {
                     if (error instanceof Response) {
                         return null;
                     }
-
-                    throw new Error('Account Not Found');
+                    throw new Error(
+                        error.response.data.message || 'Invalid credentials'
+                    );
                 }
             },
         }),

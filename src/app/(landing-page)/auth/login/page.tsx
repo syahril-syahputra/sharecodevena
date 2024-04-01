@@ -18,7 +18,7 @@ interface FormInputs {
 export default function Page() {
     const searchParams = useSearchParams();
     const error = searchParams.get('error');
-    const [loginFail, setloginFail] = useState(false);
+    const [loginFail, setloginFail] = useState('');
     const scheme = yup.object({
         email: yup.string().required().email().label('Email'),
         password: yup.string().required().label('Password'),
@@ -33,7 +33,7 @@ export default function Page() {
     });
     const router = useRouter();
     async function onsubmit(data: FormInputs) {
-        setloginFail(false);
+        setloginFail('');
         // handle submitting the form
         try {
             const callbackUrl = searchParams.get('callbackUrl') || '/';
@@ -47,7 +47,7 @@ export default function Page() {
             // console.log(request);
 
             if (request?.error) {
-                setloginFail(true);
+                setloginFail(request?.error);
             } else {
                 router.refresh();
                 router.push(callbackUrl || '');
@@ -117,8 +117,7 @@ export default function Page() {
                                 icon={faCircleExclamation}
                                 className="mr-4"
                             />
-                            <span className="font-medium">Wrong Account!</span>{' '}
-                            Your Account Not Found
+                            {loginFail}
                         </Alert>
                     )}
                     <FormError error={error} />

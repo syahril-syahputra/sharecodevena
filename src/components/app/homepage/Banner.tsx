@@ -9,16 +9,17 @@ function HomePageBanner() {
 
     const router = useRouter();
     return (
-        <div className="relative flex h-auto min-h-full w-full items-center  pb-24 pt-24 ">
+        <div className="relative flex h-auto min-h-full w-full items-center  bg-slate-200 pb-24 pt-24 dark:bg-slate-800 ">
             <div className="container  space-y-10 text-center ">
-                <motion.span
+                <motion.div
                     initial={{ opacity: 0, marginBottom: '300px' }}
                     whileInView={{ opacity: 1, marginBottom: '40px' }}
                     transition={{ duration: 1 }}
-                    className=" block flex-wrap text-[25px] font-bold md:text-[40px]"
+                    className=" block flex-wrap font-semibold md:text-xl"
                 >
+                    <h1 className="pb-2 text-[40px] font-bold">Venatronics</h1>
                     Your preferred supplier for global sourcing
-                </motion.span>
+                </motion.div>
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}

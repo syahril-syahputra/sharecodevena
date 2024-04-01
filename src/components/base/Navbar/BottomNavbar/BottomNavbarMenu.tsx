@@ -56,7 +56,7 @@ export default function BottomNavbarMenu(props: IProps) {
                         >
                             <Dropdown.Header>
                                 <span className="block text-sm">Email</span>
-                                <span className="block truncate text-sm font-medium">
+                                <span className="block truncate text-sm font-medium lowercase">
                                     {props.session.email}
                                 </span>
                             </Dropdown.Header>

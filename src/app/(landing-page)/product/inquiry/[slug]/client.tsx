@@ -8,6 +8,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { IProduct } from '@/types/product';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
     product: IProduct;
@@ -60,7 +62,6 @@ export default function ClientPage(props: IProps) {
 
     async function onSubmit(data: FormInputs) {
         // handle submitting the form
-        console.log('asdasd');
         const dataRequest = {
             slug_product: props.product.slug_product,
             country: data.country,
@@ -143,10 +144,27 @@ export default function ClientPage(props: IProps) {
                                 <Select
                                     id="countries"
                                     {...register('country')}
-                                    required
+                                    helperText={
+                                        <>
+                                            {errors.country && (
+                                                <a className="mt-2 text-sm text-red-500">
+                                                    {errors.country.message}
+                                                </a>
+                                            )}
+                                        </>
+                                    }
                                 >
+                                    <option
+                                        key={0}
+                                        hidden
+                                        selected
+                                        value={''}
+                                        disabled
+                                    >
+                                        Select Country
+                                    </option>
                                     {props.country.map((item) => (
-                                        <option key={item.id}>
+                                        <option key={item.id} value={item.name}>
                                             {item.name}
                                         </option>
                                     ))}
@@ -245,8 +263,12 @@ export default function ClientPage(props: IProps) {
 
                         {errorResponse && (
                             <Alert color="failure">
+                                <FontAwesomeIcon
+                                    icon={faCircleExclamation}
+                                    className="mr-4"
+                                />
                                 <span className="font-medium">
-                                    Register Failed
+                                    Submit Failed
                                 </span>{' '}
                                 {errorResponse}
                             </Alert>

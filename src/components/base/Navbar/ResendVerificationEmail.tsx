@@ -23,7 +23,7 @@ export default function ResendVerificationEmail() {
         return null;
     }
     return (
-        <div className="bg-red-300 dark:bg-red-600">
+        <div className="bg-red-600 text-white dark:bg-red-600 dark:text-white">
             {loading && (
                 <div className="container py-2 text-center font-bold">
                     Sending email verification...
@@ -31,12 +31,12 @@ export default function ResendVerificationEmail() {
             )}
             {!loading && (
                 <div className="container py-2 text-center font-bold">
-                    Please Verify Your Email{' '}
+                    Please verify your email,{' '}
                     <label
                         onClick={resend}
                         className="cursor-pointer underline hover:opacity-70"
                     >
-                        Click here to resend email verification
+                        click here to resend email verification
                     </label>
                 </div>
             )}

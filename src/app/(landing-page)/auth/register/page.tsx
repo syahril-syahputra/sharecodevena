@@ -1,5 +1,7 @@
 'use client';
 import fetchClient from '@/utils/FetchClient';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { Alert, Button, Checkbox, Label, TextInput } from 'flowbite-react';
@@ -214,6 +216,10 @@ export default function Page() {
                     </div>
                     {errorResponse && (
                         <Alert color="failure">
+                            <FontAwesomeIcon
+                                icon={faCircleExclamation}
+                                className="mr-4"
+                            />
                             <span className="font-medium">Register Failed</span>{' '}
                             {errorResponse}
                         </Alert>
