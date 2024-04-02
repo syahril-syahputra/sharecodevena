@@ -1,8 +1,12 @@
 'use client';
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { Alert, Button, Checkbox, Label, TextInput } from 'flowbite-react';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import React from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -12,6 +16,9 @@ interface FormInputs {
     rememberMe?: boolean;
 }
 export default function Page() {
+    const searchParams = useSearchParams();
+    const error = searchParams.get('error');
+    const [loginFail, setloginFail] = useState('');
     const scheme = yup.object({
         email: yup.string().required().email().label('Email'),
         password: yup.string().required().label('Password'),
@@ -24,11 +31,32 @@ export default function Page() {
         mode: 'onChange',
         resolver: yupResolver(scheme),
     });
-
-    function onsubmit(data: FormInputs) {
+    const router = useRouter();
+    async function onsubmit(data: FormInputs) {
+        setloginFail('');
         // handle submitting the form
-        console.log(data);
+        try {
+            const callbackUrl = searchParams.get('callbackUrl') || '/';
+            const request = await signIn('credentials', {
+                email: data.email,
+                password: data.password,
+                remember_me: data.rememberMe,
+                redirect: false,
+                callbackUrl: callbackUrl,
+            });
+            // console.log(request);
+
+            if (request?.error) {
+                setloginFail(request?.error);
+            } else {
+                router.refresh();
+                router.push(callbackUrl || '');
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
+
     return (
         <div className="container  mt-8 pt-4">
             <div className="mx-auto max-w-xl">
@@ -83,12 +111,35 @@ export default function Page() {
                         <Checkbox id="remember" {...register('rememberMe')} />
                         <Label htmlFor="remember">Remember me</Label>
                     </div>
-
-                    <Button type="submit" isProcessing={isSubmitting}>
+                    {loginFail && (
+                        <Alert color="failure">
+                            <FontAwesomeIcon
+                                icon={faCircleExclamation}
+                                className="mr-4"
+                            />
+                            {loginFail}
+                        </Alert>
+                    )}
+                    <FormError error={error} />
+                    <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        isProcessing={isSubmitting}
+                    >
                         Submit
                     </Button>
                 </form>
             </div>
         </div>
+    );
+}
+function FormError({ error }: { error: string | null }) {
+    if (!error) return null;
+
+    return (
+        <Alert color="failure">
+            <FontAwesomeIcon icon={faCircleExclamation} className="mr-4" />
+            <span className="font-medium">Login Failed! </span> {error}
+        </Alert>
     );
 }

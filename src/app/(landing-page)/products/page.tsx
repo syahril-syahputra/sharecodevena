@@ -147,21 +147,14 @@ export default function page() {
 
     return (
         <div>
-            <div className="relative flex h-auto w-full items-center ">
-                <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  text-center text-white">
+            <div className="relative flex h-auto w-full items-center bg-slate-300 dark:bg-slate-700">
+                <div className="container pb-12 pt-24">
                     <h1 className="text-[48px]">Our Products</h1>
                     <span className="font-bold] mb-8 flex-wrap text-lg">
                         Venatronics provides distribution services for
                         semiconductors and electronics, including:
                     </span>
                 </div>
-                <video
-                    loop
-                    src="/videos/product.mp4"
-                    className="w-full"
-                    autoPlay
-                    muted
-                ></video>
             </div>
             <div className="container py-8">
                 <ul className="grid-col-1 grid list-inside list-decimal py-4 font-bold md:grid-cols-2">

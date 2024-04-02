@@ -9,16 +9,17 @@ function HomePageBanner() {
 
     const router = useRouter();
     return (
-        <div className="relative flex h-auto min-h-full w-full items-center ">
-            <div className="container absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform  space-y-10 text-center text-white">
-                <motion.span
+        <div className="relative flex h-auto min-h-full w-full items-center  bg-slate-200 pb-24 pt-24 dark:bg-slate-800 ">
+            <div className="container  space-y-10 text-center ">
+                <motion.div
                     initial={{ opacity: 0, marginBottom: '300px' }}
                     whileInView={{ opacity: 1, marginBottom: '40px' }}
                     transition={{ duration: 1 }}
-                    className=" block flex-wrap text-[25px] font-bold md:text-[40px]"
+                    className=" block flex-wrap font-semibold md:text-xl"
                 >
+                    <h1 className="pb-2 text-[40px] font-bold">Venatronics</h1>
                     Your preferred supplier for global sourcing
-                </motion.span>
+                </motion.div>
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -34,15 +35,6 @@ function HomePageBanner() {
                     />
                     <HotProduct />
                 </motion.div>
-            </div>
-            <div className="h-[500px] w-full overflow-scroll md:h-full">
-                <video
-                    loop
-                    src="/videos/banner.mp4"
-                    className=" h-full w-full object-cover "
-                    autoPlay
-                    muted
-                ></video>
             </div>
         </div>
     );
