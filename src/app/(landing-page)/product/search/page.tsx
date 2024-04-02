@@ -16,6 +16,11 @@ type InventoryItem = {
     description: string;
     available_quantity: number;
 };
+type SuggestionItemTYpe = {
+    part_number: string;
+    slug_product: string;
+    slug_part_number: string;
+};
 export default function Page({ searchParams }: PageProps) {
     const [text, settext] = useState(searchParams.q || '');
     const [currentPage, setCurrentPage] = useState(1);
@@ -25,11 +30,9 @@ export default function Page({ searchParams }: PageProps) {
     const [suggestion, setsuggestion] = useState([]);
 
     useEffect(() => {
-        console.log('ganti karna page ' + currentPage);
         fetchData();
     }, [currentPage]);
     useEffect(() => {
-        console.log('ganti karna text ' + text);
         let timeoutId: NodeJS.Timeout;
         const checkTextChange = () => {
             timeoutId = setTimeout(() => {
@@ -59,6 +62,9 @@ export default function Page({ searchParams }: PageProps) {
 
             // console.log(res.data.data.items);
         } catch (error) {
+            setdata([]);
+            settotalPage(1);
+            setsuggestion([]);
             console.log(error);
         } finally {
             setisSearching(false);
@@ -80,8 +86,18 @@ export default function Page({ searchParams }: PageProps) {
                     <div className="flex space-x-4 py-4">
                         <span className="font-bold">Suggestion</span>
                         <ul className="flex space-x-4 text-sm font-semibold underline">
-                            {suggestion.map((item) => (
-                                <li key={item}>{item}</li>
+                            {suggestion.map((item: SuggestionItemTYpe) => (
+                                <Link
+                                    key={item.part_number}
+                                    href={
+                                        '/product/' +
+                                        item.slug_part_number +
+                                        '/' +
+                                        item.slug_product
+                                    }
+                                >
+                                    <li>{item.part_number}</li>
+                                </Link>
                             ))}
                         </ul>
                     </div>
@@ -90,7 +106,6 @@ export default function Page({ searchParams }: PageProps) {
             {isSearching && <SkeletonTable row={5} />}
             {!isSearching && (
                 <>
-                    {' '}
                     <Table hoverable striped className="border">
                         <Table.Head>
                             <Table.HeadCell>Part Number</Table.HeadCell>

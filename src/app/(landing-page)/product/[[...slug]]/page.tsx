@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 import fetchServer from '@/utils/fetchServer';
 import { getCurrentUser } from '@/utils/session';
+import ItemList from './ItemList';
 async function getData(slug: string) {
     try {
         const res = await fetchServer({ url: '/products/' + slug });
@@ -11,27 +12,7 @@ async function getData(slug: string) {
         return notFound();
     }
 }
-function ItemList(props: {
-    title: string;
-    value: string;
-    hideValue?: boolean;
-}) {
-    return (
-        <div>
-            <div className=" pb-4 font-semibold">{props.title}</div>
-            {props.hideValue ? (
-                <button
-                    className=" rounded-md bg-cyan-800 px-4 py-1 text-gray-400 "
-                    disabled
-                >
-                    Show
-                </button>
-            ) : (
-                <h1 className="text-base font-normal">{props.value}</h1>
-            )}
-        </div>
-    );
-}
+
 export default async function Page({ params }: { params: { slug: string } }) {
     const user = await getCurrentUser();
     const partId = params.slug[1];
