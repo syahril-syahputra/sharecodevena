@@ -3,6 +3,7 @@ import SearchProduct from '@/components/SearchProduct/SearchProduct';
 import SkeletonTable from '@/components/Skeleton/SkeletonTable';
 import fetchClient from '@/utils/FetchClient';
 import { Button, Pagination, Table } from 'flowbite-react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 interface PageProps {
@@ -28,6 +29,7 @@ export default function Page({ searchParams }: PageProps) {
     const [totalPage, settotalPage] = useState(0);
     const [data, setdata] = useState([]);
     const [suggestion, setsuggestion] = useState([]);
+    const { status } = useSession();
 
     useEffect(() => {
         fetchData();
@@ -81,7 +83,7 @@ export default function Page({ searchParams }: PageProps) {
                     value={text}
                     onChange={settext}
                     onClick={fetchData}
-                />
+                />{' '}
                 {suggestion.length > 0 && !isSearching && (
                     <div className="flex space-x-4 py-4">
                         <span className="font-bold">Suggestion</span>
@@ -146,13 +148,16 @@ export default function Page({ searchParams }: PageProps) {
                                             {item.description}
                                         </Table.Cell>
                                         <Table.Cell className="items-end text-right">
-                                            {/* {item.available_quantity} */}
-                                            <Button
-                                                disabled
-                                                className="float-right"
-                                            >
-                                                Show
-                                            </Button>
+                                            {status === 'authenticated' ? (
+                                                item.available_quantity
+                                            ) : (
+                                                <Button
+                                                    onClick={() => signIn()}
+                                                    className="float-right"
+                                                >
+                                                    Show
+                                                </Button>
+                                            )}
                                         </Table.Cell>
                                         <Table.Cell className="space-x-4">
                                             <Link
