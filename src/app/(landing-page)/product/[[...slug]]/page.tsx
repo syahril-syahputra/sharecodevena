@@ -3,10 +3,10 @@ import React from 'react';
 import fetchServer from '@/utils/fetchServer';
 import { getCurrentUser } from '@/utils/session';
 import ItemList from './ItemList';
+import BackButton from '@/components/base/BackButton';
 async function getData(slug: string) {
     try {
         const res = await fetchServer({ url: '/products/' + slug });
-        console.log(res);
         return res.data.data;
     } catch (error) {
         return notFound();
@@ -19,7 +19,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const res = await getData(partId);
 
     return (
-        <div className="container pt-20">
+        <div className="container space-y-4 pt-20">
+            <div className="mx-auto md:w-2/3">
+                <BackButton />
+            </div>
             <div className="mx-auto rounded-xl border border-gray-500 p-8  md:w-2/3">
                 <h1>{res.part_number}</h1>
                 <h2>{res.manufacturer}</h2>
