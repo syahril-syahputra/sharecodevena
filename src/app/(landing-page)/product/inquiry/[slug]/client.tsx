@@ -40,11 +40,11 @@ export default function ClientPage(props: IProps) {
             .number()
             .typeError('Quantity must be a valid number')
             .required()
-            .label('Quantity')
-            .max(props.product.available_quantity),
+            .label('Quantity'),
+        // .max(props.product.available_quantity),
         target_price: yup
             .number()
-            .typeError('Quantity must be a valid number')
+            .typeError('Target Price must be a valid number')
             .required()
             .label('Target Price'),
         phone: yup.string().label('Phone'),

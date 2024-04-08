@@ -67,7 +67,6 @@ export default function Page({ searchParams }: PageProps) {
             setdata([]);
             settotalPage(1);
             setsuggestion([]);
-            console.log(error);
         } finally {
             setisSearching(false);
         }
