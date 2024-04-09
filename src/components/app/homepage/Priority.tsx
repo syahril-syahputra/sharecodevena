@@ -32,12 +32,12 @@ function Priority() {
                 transition={{ duration: 1 }}
             >
                 <Image
-                    src="/images/sample.webp"
+                    src="/images/cpu.jpg"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    alt="asd"
-                    className="mx-auto w-full max-w-4xl rounded-[20%] shadow-2xl"
+                    alt="cpu"
+                    className="mx-auto my-auto w-full max-w-md rounded-2xl shadow-xl"
                 />
             </motion.div>
             <motion.div
