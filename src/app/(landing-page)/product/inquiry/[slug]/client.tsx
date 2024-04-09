@@ -24,7 +24,7 @@ interface IProps {
 interface FormInputs {
     country: string;
     quantity: number;
-    target_price: number;
+    target_price?: string;
     phone?: string;
     message?: string;
 }
@@ -43,9 +43,11 @@ export default function ClientPage(props: IProps) {
             .label('Quantity'),
         // .max(props.product.available_quantity),
         target_price: yup
-            .number()
-            .typeError('Target Price must be a valid number')
-            .required()
+            .string()
+            // .default(0)
+            // .optional()
+            // .typeError('Target Price must be a valid number')
+            // .required()
             .label('Target Price'),
         phone: yup.string().label('Phone'),
         message: yup.string().label('Message'),
@@ -66,7 +68,7 @@ export default function ClientPage(props: IProps) {
             slug_product: props.product.slug_product,
             country: data.country,
             quantity: data.quantity,
-            target_price: data.target_price,
+            target_price: data.target_price ? data.target_price : 0,
             phone: data.phone,
             message: data.message,
         };
@@ -200,7 +202,7 @@ export default function ClientPage(props: IProps) {
                                 <span className="labelForm">Target Price</span>
                                 <TextInput
                                     placeholder="Insert Target Price"
-                                    type="text"
+                                    type="number"
                                     {...register('target_price')}
                                     helperText={
                                         <>
