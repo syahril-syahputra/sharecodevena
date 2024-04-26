@@ -64,6 +64,7 @@ export default function ClientPage(props: IProps) {
         // handle submitting the form
         const dataRequest = {
             slug_product: props.product.slug_product,
+            part_number: props.product.part_number,
             country: data.country,
             quantity: data.quantity,
             target_price: data.target_price,
