@@ -283,7 +283,7 @@ export default function ClientPage(props: IProps) {
                             </Alert>
                         )}
 
-                        {!!props.user && (
+                        {!props.user && (
                             <span className="flex justify-center font-bold italic">
                                 *You need to
                                 <span
@@ -298,7 +298,7 @@ export default function ClientPage(props: IProps) {
                         <div className="flex flex-col items-center justify-center space-y-4">
                             <Button
                                 type="submit"
-                                disabled={isSubmitting || !!props.user}
+                                disabled={isSubmitting || !props.user}
                                 isProcessing={isSubmitting}
                             >
                                 Submit Inquiry

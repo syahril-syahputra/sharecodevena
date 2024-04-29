@@ -191,7 +191,7 @@ export default function Page({ searchParams }: PageProps) {
                     {data.length === 0 && (
                         <div className="flex overflow-x-auto sm:justify-center">
                             <h2>
-                                Cant find your product? Write us email{' '}
+                                Cannot find your product? Write us email{' '}
                                 <Link href="/rfq" className="italic underline">
                                     here
                                 </Link>
