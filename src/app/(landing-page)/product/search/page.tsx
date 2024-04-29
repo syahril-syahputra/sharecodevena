@@ -177,14 +177,28 @@ export default function Page({ searchParams }: PageProps) {
                             })}
                         </Table.Body>
                     </Table>
-                    <div className="flex overflow-x-auto sm:justify-center">
-                        <Pagination
-                            currentPage={currentPage}
-                            totalPages={totalPage}
-                            onPageChange={onPageChange}
-                            showIcons
-                        />
-                    </div>
+
+                    {data.length > 0 && (
+                        <div className="flex overflow-x-auto sm:justify-center">
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPage}
+                                onPageChange={onPageChange}
+                                showIcons
+                            />
+                        </div>
+                    )}
+                    {data.length === 0 && (
+                        <div className="flex overflow-x-auto sm:justify-center">
+                            <h2>
+                                Cant find your product? Write us email{' '}
+                                <Link href="/rfq" className="italic underline">
+                                    here
+                                </Link>
+                                .
+                            </h2>
+                        </div>
+                    )}
                 </>
             )}
         </div>

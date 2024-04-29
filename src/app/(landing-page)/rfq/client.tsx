@@ -7,12 +7,10 @@ import type { User } from 'next-auth';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { IProduct } from '@/types/product';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 interface IProps {
-    product: IProduct;
     user?: User;
     country: {
         id: number;
@@ -22,6 +20,7 @@ interface IProps {
     }[];
 }
 interface FormInputs {
+    part_number: string;
     country: string;
     quantity: number;
     target_price?: string;
@@ -35,20 +34,14 @@ export default function ClientPage(props: IProps) {
     const [isSubmited, setisSubmited] = useState(false);
 
     const scheme = yup.object({
+        part_number: yup.string().required().label('Part Number'),
         country: yup.string().required().label('Country'),
         quantity: yup
             .number()
             .typeError('Quantity must be a valid number')
             .required()
             .label('Quantity'),
-        // .max(props.product.available_quantity),
-        target_price: yup
-            .string()
-            // .default(0)
-            // .optional()
-            // .typeError('Target Price must be a valid number')
-            // .required()
-            .label('Target Price'),
+        target_price: yup.string().label('Target Price'),
         phone: yup.string().label('Phone'),
         message: yup.string().label('Message'),
     });
@@ -65,8 +58,7 @@ export default function ClientPage(props: IProps) {
     async function onSubmit(data: FormInputs) {
         // handle submitting the form
         const dataRequest = {
-            slug_product: props.product.slug_product,
-            part_number: props.product.part_number,
+            part_number: data.part_number,
             country: data.country,
             quantity: data.quantity,
             target_price: data.target_price ? parseFloat(data.target_price) : 0,
@@ -104,7 +96,7 @@ export default function ClientPage(props: IProps) {
             {isSubmited && (
                 <div className="mx-auto my-8 max-w-xl space-y-8 rounded-lg border p-8 text-center">
                     <div className="text-lg font-bold">
-                        Your inquiry has been successfully processed
+                        Your custom request has been successfully processed
                     </div>
                     <div>
                         We will immediately contact you via email for further
@@ -114,11 +106,31 @@ export default function ClientPage(props: IProps) {
             )}
             {!isSubmited && (
                 <div className="mx-auto  space-y-4 rounded-xl border p-8 dark:border-slate-400">
-                    <h1>Inquiry Product</h1>
+                    <h1 className="mb-0">RFQ</h1>
+                    <span className="italic">
+                        Fill in the following form with the product you want
+                    </span>
                     <form
                         className="space-y-8"
                         onSubmit={handleSubmit(onSubmit)}
                     >
+                        <div>
+                            <span className="labelForm">Part Number</span>
+                            <TextInput
+                                placeholder="Request your part number here"
+                                type="text"
+                                {...register('part_number')}
+                                helperText={
+                                    <>
+                                        {errors.part_number && (
+                                            <a className="mt-2 text-sm text-red-500">
+                                                {errors.part_number.message}
+                                            </a>
+                                        )}
+                                    </>
+                                }
+                            />
+                        </div>
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
                                 <span className="labelForm">Name</span>
@@ -174,12 +186,12 @@ export default function ClientPage(props: IProps) {
                                 </Select>
                             </div>
                             <div>
-                                <span className="labelForm">Part Number</span>
+                                <span className="labelForm">Email</span>
                                 <TextInput
                                     placeholder=""
                                     type="text"
                                     readOnly
-                                    value={props.product.part_number}
+                                    value={props.user?.email}
                                 />
                             </div>
                             <div>
@@ -217,15 +229,6 @@ export default function ClientPage(props: IProps) {
                                             )}
                                         </>
                                     }
-                                />
-                            </div>
-                            <div>
-                                <span className="labelForm">Email</span>
-                                <TextInput
-                                    placeholder=""
-                                    type="text"
-                                    readOnly
-                                    value={props.user?.email}
                                 />
                             </div>
                             <div>
