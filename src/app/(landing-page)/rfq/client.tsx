@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { signIn } from 'next-auth/react';
 
 interface IProps {
     user?: User;
@@ -139,9 +140,11 @@ export default function ClientPage(props: IProps) {
                                     type="text"
                                     readOnly
                                     value={
-                                        props.user?.first_name +
-                                        ' ' +
-                                        props.user?.last_name
+                                        props.user
+                                            ? props.user?.first_name +
+                                              ' ' +
+                                              props.user?.last_name
+                                            : ''
                                     }
                                 />
                             </div>
@@ -280,10 +283,22 @@ export default function ClientPage(props: IProps) {
                             </Alert>
                         )}
 
+                        {!!props.user && (
+                            <span className="flex justify-center font-bold italic">
+                                *You need to
+                                <span
+                                    onClick={() => signIn()}
+                                    className="mx-1 cursor-pointer italic underline"
+                                >
+                                    login
+                                </span>
+                                before submit the form
+                            </span>
+                        )}
                         <div className="flex flex-col items-center justify-center space-y-4">
                             <Button
                                 type="submit"
-                                disabled={isSubmitting}
+                                disabled={isSubmitting || !!props.user}
                                 isProcessing={isSubmitting}
                             >
                                 Submit Inquiry
