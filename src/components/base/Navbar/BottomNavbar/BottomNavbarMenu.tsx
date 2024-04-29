@@ -88,9 +88,9 @@ export default function BottomNavbarMenu(props: IProps) {
                     >
                         Products
                     </Navbar.Link>
-                    {/* <Navbar.Link href="/rfq" active={pathname === '/rfq'}>
+                    <Navbar.Link href="/rfq" active={pathname === '/rfq'}>
                         RFQ
-                    </Navbar.Link> */}
+                    </Navbar.Link>
                     <Navbar.Link
                         href="/distributorships"
                         active={pathname === '/distributorships'}

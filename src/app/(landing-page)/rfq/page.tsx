@@ -1,33 +1,46 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { Button, TextInput, Textarea } from 'flowbite-react';
-import React from 'react';
+import { Alert, Button, Select, TextInput, Textarea } from 'flowbite-react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import fetchClient from '@/utils/FetchClient';
+import { notFound } from 'next/navigation';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faCheck,
+    faCircleExclamation,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface FormInputs {
-    name: string;
-    company: string;
+    part_number: string;
     country: string;
-    partNumber: string;
     quantity: number;
-    email: string;
+    target_price: number;
     phone: string;
     message: string;
 }
 export default function Page() {
+    const [listCountry, setlistCountry] = useState([]);
+    const [errorResponse, seterrorResponse] = useState('');
+    const [isSubmited, setisSubmited] = useState(false);
     const scheme = yup.object({
-        name: yup.string().required().label('Name'),
-        company: yup.string().required().label('Company'),
+        part_number: yup.string().required().label('Part Number'),
         country: yup.string().required().label('Country'),
-        partNumber: yup.string().required().label('Part Number'),
+        target_price: yup
+            .number()
+            .required()
+            .typeError('Targer Price must be a number')
+            .min(1)
+            .label('Targer Price'),
         quantity: yup
             .number()
             .required()
             .typeError('Quantity must be a number')
             .min(1)
             .label('Quantity'),
-        email: yup.string().required().email().label('Email'),
         phone: yup
             .string()
             .matches(
@@ -38,13 +51,60 @@ export default function Page() {
             .label('Phone number'),
         message: yup.string().required().label('Message'),
     });
-    function woosalSubmit(data: FormInputs) {
-        // handle submitting the form
-        console.log(data);
+    useEffect(() => {
+        const fetch = async () => {
+            try {
+                const res = await fetchClient({ url: '/region/countries' });
+                setlistCountry(res.data.data);
+            } catch (error) {
+                return notFound();
+            }
+        };
+        fetch();
+    }, []);
+
+    async function woosalSubmit(data: FormInputs) {
+        const dataRequest = {
+            part_number: data.part_number,
+            country: data.country,
+            quantity: data.quantity,
+            target_price: data.target_price,
+            phone: data.phone,
+            message: data.message,
+        };
+        setisSubmited(false);
+        seterrorResponse('');
+        try {
+            await fetchClient({
+                method: 'POST',
+                url: 'member/product/inquiry',
+                body: dataRequest,
+            });
+            setisSubmited(true);
+            reset();
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response?.data.errors) {
+                    const obj = error.response?.data.errors;
+
+                    for (const [key, value] of Object.entries(obj)) {
+                        if (key in scheme.fields) {
+                            setError(key as keyof FormInputs, {
+                                type: 'custom',
+                                message: value as string,
+                            });
+                        }
+                    }
+                }
+                seterrorResponse(error.response?.data.message);
+            }
+        }
     }
     const {
         handleSubmit,
         register,
+        setError,
+        reset,
         formState: { errors, isSubmitting },
     } = useForm<FormInputs>({
         mode: 'onChange',
@@ -58,69 +118,16 @@ export default function Page() {
                     className=" space-y-4"
                     onSubmit={handleSubmit(woosalSubmit)}
                 >
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        <div>
-                            <span className="labelForm">Name</span>
-                            <TextInput
-                                {...register('name')}
-                                helperText={
-                                    <>
-                                        {errors.name && (
-                                            <p className="mt-2 text-sm text-red-500">
-                                                {errors.name.message}
-                                            </p>
-                                        )}
-                                    </>
-                                }
-                                placeholder=""
-                                type="text"
-                            />
-                        </div>
-                        <div>
-                            <span className="labelForm">Company</span>
-                            <TextInput
-                                {...register('company')}
-                                helperText={
-                                    <>
-                                        {errors.company && (
-                                            <p className="mt-2 text-sm text-red-500">
-                                                {errors.company.message}
-                                            </p>
-                                        )}
-                                    </>
-                                }
-                                placeholder=""
-                                type="text"
-                            />
-                        </div>
-                        <div>
-                            <span className="labelForm">Country</span>
-                            <TextInput
-                                {...register('country')}
-                                helperText={
-                                    <>
-                                        {errors.country && (
-                                            <p className="mt-2 text-sm text-red-500">
-                                                {errors.country.message}
-                                            </p>
-                                        )}
-                                    </>
-                                }
-                                placeholder=""
-                                type="text"
-                            />
-                        </div>
-                    </div>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                             <span className="labelForm">Part Number</span>
                             <TextInput
-                                {...register('partNumber')}
+                                {...register('part_number')}
                                 helperText={
                                     <>
-                                        {errors.partNumber && (
+                                        {errors.part_number && (
                                             <p className="mt-2 text-sm text-red-500">
-                                                {errors.partNumber.message}
+                                                {errors.part_number.message}
                                             </p>
                                         )}
                                     </>
@@ -129,6 +136,40 @@ export default function Page() {
                                 type="text"
                             />
                         </div>
+
+                        <div>
+                            <span className="labelForm">Country</span>
+                            <Select
+                                id="countries"
+                                {...register('country')}
+                                helperText={
+                                    <>
+                                        {errors.country && (
+                                            <a className="mt-2 text-sm text-red-500">
+                                                {errors.country.message}
+                                            </a>
+                                        )}
+                                    </>
+                                }
+                            >
+                                <option
+                                    key={0}
+                                    hidden
+                                    selected
+                                    value={''}
+                                    disabled
+                                >
+                                    Select Country
+                                </option>
+                                {listCountry.map((item: any) => (
+                                    <option key={item.id} value={item.name}>
+                                        {item.name}
+                                    </option>
+                                ))}
+                            </Select>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                             <span className="labelForm">Quantity</span>
 
@@ -147,17 +188,16 @@ export default function Page() {
                                 type="text"
                             />
                         </div>
-                    </div>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
-                            <span className="labelForm">Email</span>
+                            <span className="labelForm">Target Price</span>
+
                             <TextInput
-                                {...register('email')}
+                                {...register('target_price')}
                                 helperText={
                                     <>
-                                        {errors.email && (
+                                        {errors.target_price && (
                                             <p className="mt-2 text-sm text-red-500">
-                                                {errors.email.message}
+                                                {errors.target_price.message}
                                             </p>
                                         )}
                                     </>
@@ -166,6 +206,8 @@ export default function Page() {
                                 type="text"
                             />
                         </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-1">
                         <div>
                             <span className="labelForm">Phone</span>
 
@@ -201,6 +243,24 @@ export default function Page() {
                             placeholder=""
                         />
                     </div>
+                    {errorResponse && (
+                        <Alert color="failure">
+                            <FontAwesomeIcon
+                                icon={faCircleExclamation}
+                                className="mr-4"
+                            />
+                            <span className="font-medium">Submit Failed</span>{' '}
+                            {errorResponse}
+                        </Alert>
+                    )}
+                    {isSubmited && (
+                        <Alert color="success">
+                            <FontAwesomeIcon icon={faCheck} className="mr-4" />
+                            <span className="font-medium">
+                                Your request has benn submit!
+                            </span>
+                        </Alert>
+                    )}
                     <Button type="submit" isProcessing={isSubmitting}>
                         Submit
                     </Button>
