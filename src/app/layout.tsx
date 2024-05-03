@@ -4,16 +4,15 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { ThemeProvider } from './ThemeProvider';
+import { siteMeta } from '@/components/seo/metadata';
+import { jsonLd } from '@/components/seo/jsonld';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import Providers from './providers';
 config.autoAddCss = false;
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-    title: 'Venatronics',
-    description: 'Venatronics',
-};
+export const metadata: Metadata = siteMeta;
 
 export default function RootLayout({
     children,
@@ -30,6 +29,10 @@ export default function RootLayout({
                 >
                     <Providers>{children}</Providers>
                 </ThemeProvider>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+                />
             </body>
         </html>
     );

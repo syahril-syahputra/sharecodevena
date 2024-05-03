@@ -2,7 +2,6 @@ import { faCheckSquare } from '@fortawesome/free-regular-svg-icons';
 import { faTags, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'flowbite-react';
-import Image from 'next/image';
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -26,7 +25,7 @@ function Priority() {
                     OEM vendors.
                 </div>
             </motion.div>
-            <motion.div
+            {/* <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
@@ -39,7 +38,7 @@ function Priority() {
                     alt="cpu"
                     className="mx-auto my-auto w-full max-w-md rounded-2xl shadow-xl"
                 />
-            </motion.div>
+            </motion.div> */}
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
