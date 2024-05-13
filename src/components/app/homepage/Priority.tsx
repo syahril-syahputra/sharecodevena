@@ -13,50 +13,35 @@ function Priority() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 1 }}
-                className="mx-auto max-w-4xl space-y-4 text-center font-bold"
+                className="mx-auto space-y-4 font-bold"
             >
                 <div className="text-xxl ">
                     We Provide Only Authenticated Parts
                 </div>
-                <div>
-                    Venatronics excels in offering genuine electronic components
-                    directly from manufacturers, as well as through our
-                    extensive network of franchised distributors and qualified
-                    OEM vendors.
-                </div>
+                <ul className="list-outside list-disc space-y-4 pl-4">
+                    <li>
+                        Venatronics excels in offering genuine electronic
+                        components directly from manufacturers, as well as
+                        through our extensive network of franchised distributors
+                        and qualified OEM vendors.
+                    </li>
+                    <li>
+                        We provide a distinctive solution to tier-1, tier-2, and
+                        tier-3 OEMs and CMs who are in need of reliable and
+                        authenticated obsolete electronic components.
+                    </li>
+                    <li>
+                        As part of our service, every purchase order from
+                        Venatronics undergoes a thorough Quality Inspection. We
+                        are dedicated to combating counterfeit products and
+                        offer authentication and testing services for electronic
+                        components, along with value-added services. All orders
+                        placed with Venatronics are mandatory tested and
+                        authenticated by White Horse Laboratories.
+                    </li>
+                </ul>
             </motion.div>
-            {/* <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1 }}
-            >
-                <Image
-                    src="/images/cpu.jpg"
-                    width={0}
-                    height={0}
-                    sizes="100vw"
-                    alt="cpu"
-                    className="mx-auto my-auto w-full max-w-md rounded-2xl shadow-xl"
-                />
-            </motion.div> */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                className="mx-auto max-w-4xl space-y-4 text-center font-bold"
-            >
-                <div>
-                    We provide a distinctive solution to tier-1, tier-2, and
-                    tier-3 OEMs and CMs who are in need of reliable and
-                    authenticated obsolete electronic components. As part of our
-                    service, every purchase order from Venatronics undergoes a
-                    thorough Quality Inspection. We are dedicated to combating
-                    counterfeit products and offer authentication and testing
-                    services for electronic components, along with value-added
-                    services. All orders placed with Venatronics are mandatory
-                    tested and authenticated by White Horse Laboratories.
-                </div>
-            </motion.div>
+
             <motion.div
                 initial={{ opacity: 0, y: '100%' }}
                 whileInView={{ opacity: 1, y: 0 }}

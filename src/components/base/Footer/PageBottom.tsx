@@ -16,10 +16,18 @@ function Item(params: { title: string; url: string }) {
 export default function PageBottom() {
     return (
         <ul className="flex-1 space-y-6 font-medium text-gray-500 dark:text-gray-400">
-            <Item url="/term-and-conditions" title="Terms & Conditions" />
-            <Item url="/cookie-policy" title="Cookie Policy" />
             <Item url="/privacy-policy" title="Privacy Policy" />
+            <Item url="/cookie-policy" title="Cookie Policy" />
             <Item url="/contact" title="Contact" />
+            <Item url="/term-and-conditions" title="Terms & Conditions" />
+            <Item
+                url="/term-and-conditions-of-sale"
+                title="Terms & Conditions of Sale"
+            />
+            <Item
+                url="/term-and-conditions-of-export"
+                title="Terms & Conditions of Export"
+            />
         </ul>
     );
 }

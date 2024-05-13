@@ -25,34 +25,32 @@ type SuggestionItemTYpe = {
 export default function Page({ searchParams }: PageProps) {
     const [text, settext] = useState(searchParams.q || '');
     const [currentPage, setCurrentPage] = useState(1);
-    const [isSearching, setisSearching] = useState(false);
+    const [isSearching, setisSearching] = useState(true);
     const [totalPage, settotalPage] = useState(0);
     const [data, setdata] = useState([]);
     const [suggestion, setsuggestion] = useState([]);
     const { status } = useSession();
 
     useEffect(() => {
-        fetchData();
-    }, [currentPage]);
-    useEffect(() => {
         let timeoutId: NodeJS.Timeout;
         const checkTextChange = () => {
             timeoutId = setTimeout(() => {
-                fetchData();
+                setCurrentPage(1);
+                fetchData(1);
             }, 500);
         };
         checkTextChange();
         return () => clearTimeout(timeoutId);
     }, [text]);
 
-    async function fetchData() {
+    async function fetchData(page: number) {
         try {
             setisSearching(true);
             // const res = await api.get(
             //     `/products?page=${currentPage}&paginate=10&sort_by=part_number&sort_type=desc&keyword=${text}`
             // );
             const res = await fetchClient({
-                url: `/products?page=${currentPage}&paginate=10&sort_by=part_number&sort_type=desc&keyword=${text}`,
+                url: `/products?page=${page}&paginate=10&sort_by=part_number&sort_type=desc&keyword=${text}`,
             });
             setdata(res.data.data.items);
             settotalPage(res.data.data.meta.total_page);
@@ -72,7 +70,11 @@ export default function Page({ searchParams }: PageProps) {
         }
     }
 
-    const onPageChange = (page: number) => setCurrentPage(page);
+    const onPageChange = (page: number) => {
+        setCurrentPage(page);
+
+        fetchData(page);
+    };
 
     return (
         <div className="container space-y-8 pb-4 pt-24">
@@ -81,7 +83,7 @@ export default function Page({ searchParams }: PageProps) {
                 <SearchProduct
                     value={text}
                     onChange={settext}
-                    onClick={fetchData}
+                    onClick={() => fetchData(1)}
                 />{' '}
                 {suggestion.length > 0 && !isSearching && (
                     <div className="flex space-x-4 py-4">
