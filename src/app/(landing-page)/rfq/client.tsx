@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { signIn } from 'next-auth/react';
 
 interface IProps {
     user?: User;
@@ -23,7 +22,11 @@ interface IProps {
 interface FormInputs {
     part_number: string;
     country: string;
+    first_name: string;
+    last_name: string;
+    email: string;
     quantity: number;
+    company: string;
     target_price?: string;
     phone?: string;
     message?: string;
@@ -36,6 +39,10 @@ export default function ClientPage(props: IProps) {
 
     const scheme = yup.object({
         part_number: yup.string().required().label('Part Number'),
+        first_name: yup.string().required().label('First Name'),
+        last_name: yup.string().required().label('Last Name'),
+        company: yup.string().required().label('Company'),
+        email: yup.string().email().required().label('Email'),
         country: yup.string().required().label('Country'),
         quantity: yup
             .number()
@@ -59,6 +66,10 @@ export default function ClientPage(props: IProps) {
     async function onSubmit(data: FormInputs) {
         // handle submitting the form
         const dataRequest = {
+            first_name: data.first_name,
+            last_name: data.last_name,
+            company: data.company,
+            email: data.email,
             part_number: data.part_number,
             country: data.country,
             quantity: data.quantity,
@@ -66,11 +77,12 @@ export default function ClientPage(props: IProps) {
             phone: data.phone,
             message: data.message,
         };
+
         seterrorResponse('');
         try {
             await fetchClient({
                 method: 'POST',
-                url: 'member/product/inquiry',
+                url: 'member/product/rfq',
                 body: dataRequest,
             });
             setisSubmited(true);
@@ -134,27 +146,69 @@ export default function ClientPage(props: IProps) {
                         </div>
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
-                                <span className="labelForm">Name *</span>
+                                <span className="labelForm">First Name *</span>
                                 <TextInput
-                                    placeholder=""
+                                    placeholder="Insert First Name"
                                     type="text"
-                                    readOnly
-                                    value={
-                                        props.user
-                                            ? props.user?.first_name +
-                                              ' ' +
-                                              props.user?.last_name
-                                            : ''
+                                    readOnly={!!props.user}
+                                    defaultValue={
+                                        props.user ? props.user?.first_name : ''
+                                    }
+                                    {...register('first_name')}
+                                    helperText={
+                                        <>
+                                            {errors.first_name && (
+                                                <a className="mt-2 text-sm text-red-500">
+                                                    {errors.first_name.message}
+                                                </a>
+                                            )}
+                                        </>
+                                    }
+                                />
+                            </div>
+
+                            <div>
+                                <span className="labelForm">Last Name *</span>
+                                <TextInput
+                                    placeholder="Insert Last Name"
+                                    type="text"
+                                    readOnly={!!props.user}
+                                    defaultValue={
+                                        props.user ? props.user?.last_name : ''
+                                    }
+                                    {...register('last_name')}
+                                    helperText={
+                                        <>
+                                            {errors.last_name && (
+                                                <a className="mt-2 text-sm text-red-500">
+                                                    {errors.last_name.message}
+                                                </a>
+                                            )}
+                                        </>
                                     }
                                 />
                             </div>
                             <div>
                                 <span className="labelForm">Company *</span>
                                 <TextInput
-                                    placeholder=""
+                                    placeholder="Insert Company"
                                     type="text"
-                                    readOnly
-                                    value={props.user?.company_name}
+                                    readOnly={!!props.user}
+                                    defaultValue={
+                                        props.user
+                                            ? props.user?.company_name
+                                            : ''
+                                    }
+                                    {...register('company')}
+                                    helperText={
+                                        <>
+                                            {errors.company && (
+                                                <a className="mt-2 text-sm text-red-500">
+                                                    {errors.company.message}
+                                                </a>
+                                            )}
+                                        </>
+                                    }
                                 />
                             </div>
                             <div>
@@ -186,10 +240,22 @@ export default function ClientPage(props: IProps) {
                             <div>
                                 <span className="labelForm">Email *</span>
                                 <TextInput
-                                    placeholder=""
+                                    placeholder="Insert Company"
                                     type="text"
-                                    readOnly
-                                    value={props.user?.email}
+                                    readOnly={!!props.user}
+                                    defaultValue={
+                                        props.user ? props.user?.email : ''
+                                    }
+                                    {...register('email')}
+                                    helperText={
+                                        <>
+                                            {errors.email && (
+                                                <a className="mt-2 text-sm text-red-500">
+                                                    {errors.email.message}
+                                                </a>
+                                            )}
+                                        </>
+                                    }
                                 />
                             </div>
                             <div>
@@ -210,7 +276,9 @@ export default function ClientPage(props: IProps) {
                                 />
                             </div>
                             <div>
-                                <span className="labelForm">Target Price</span>
+                                <span className="labelForm">
+                                    Target Price (USD)
+                                </span>
                                 <TextInput
                                     placeholder="Insert Target Price"
                                     type="number"
@@ -278,22 +346,10 @@ export default function ClientPage(props: IProps) {
                             </Alert>
                         )}
 
-                        {!props.user && (
-                            <span className="flex justify-center font-bold italic">
-                                *You need to
-                                <span
-                                    onClick={() => signIn()}
-                                    className="mx-1 cursor-pointer italic underline"
-                                >
-                                    login
-                                </span>
-                                before submit the form
-                            </span>
-                        )}
                         <div className="flex flex-col items-center justify-center space-y-4">
                             <Button
                                 type="submit"
-                                disabled={isSubmitting || !props.user}
+                                disabled={isSubmitting}
                                 isProcessing={isSubmitting}
                             >
                                 Submit Inquiry

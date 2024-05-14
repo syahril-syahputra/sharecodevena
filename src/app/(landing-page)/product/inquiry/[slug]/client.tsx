@@ -121,7 +121,7 @@ export default function ClientPage(props: IProps) {
                     >
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
-                                <span className="labelForm">Name</span>
+                                <span className="labelForm">Name *</span>
                                 <TextInput
                                     placeholder=""
                                     type="text"
@@ -134,7 +134,7 @@ export default function ClientPage(props: IProps) {
                                 />
                             </div>
                             <div>
-                                <span className="labelForm">Company</span>
+                                <span className="labelForm">Company *</span>
                                 <TextInput
                                     placeholder=""
                                     type="text"
@@ -143,7 +143,7 @@ export default function ClientPage(props: IProps) {
                                 />
                             </div>
                             <div>
-                                <span className="labelForm">Country</span>
+                                <span className="labelForm">Country *</span>
                                 <Select
                                     id="countries"
                                     {...register('country')}
@@ -174,7 +174,7 @@ export default function ClientPage(props: IProps) {
                                 </Select>
                             </div>
                             <div>
-                                <span className="labelForm">Part Number</span>
+                                <span className="labelForm">Part Number *</span>
                                 <TextInput
                                     placeholder=""
                                     type="text"
@@ -183,7 +183,7 @@ export default function ClientPage(props: IProps) {
                                 />
                             </div>
                             <div>
-                                <span className="labelForm">Quantity</span>
+                                <span className="labelForm">Quantity *</span>
                                 <TextInput
                                     placeholder="Insert Quantity"
                                     type="text"
@@ -200,7 +200,9 @@ export default function ClientPage(props: IProps) {
                                 />
                             </div>
                             <div>
-                                <span className="labelForm">Target Price</span>
+                                <span className="labelForm">
+                                    Target Price (USD)
+                                </span>
                                 <TextInput
                                     placeholder="Insert Target Price"
                                     type="number"
@@ -220,7 +222,7 @@ export default function ClientPage(props: IProps) {
                                 />
                             </div>
                             <div>
-                                <span className="labelForm">Email</span>
+                                <span className="labelForm">Email *</span>
                                 <TextInput
                                     placeholder=""
                                     type="text"
